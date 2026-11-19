@@ -1,5 +1,7 @@
 import { el } from './dom.js';
-import { MAX_STUDENTS, formatGroups, parseLabels, shuffleGroups, swapStudents } from './group-shuffler-model.js';
+import {
+  MAX_STUDENTS, formatGroups, moveStudent, parseLabels, shuffleGroups, swapStudents,
+} from './group-shuffler-model.js';
 
 const byId = name => document.getElementById('group-' + name);
 const form = byId('setup');
@@ -15,11 +17,12 @@ const cancel = byId('cancel');
 const undo = byId('undo');
 const copy = byId('copy');
 const copyDialog = byId('copy-dialog');
-const instructions = 'Select two students in different groups to swap them.';
+const instructions = 'Select a student to move or swap.';
+const selectedInstructions = 'Choose Move here in another group, or select another student to swap.';
 
 let groups = [];
 let selected = null;
-let lastSwap = null;
+let lastEdit = null;
 
 const usesLabels = () => form.elements['roster-mode'].value === 'labels';
 const memberLabel = member => groups[member.group][member.position];
@@ -62,6 +65,19 @@ function renderGroups() {
     const title = el('h3', `Group ${group + 1}`);
     title.id = `group-card-${group + 1}`;
     card.setAttribute('aria-labelledby', title.id);
+    const heading = el('div', undefined, 'group-card-heading');
+    const move = el('button', 'Move here', 'group-move');
+    move.type = 'button';
+    move.dataset.moveGroup = group;
+    move.setAttribute('aria-label', `Move here to Group ${group + 1}`);
+    move.hidden = true;
+    heading.append(title, move);
+    card.append(heading);
+
+    if (!students.length) {
+      card.append(el('p', 'Empty group', 'group-empty-card'));
+      return card;
+    }
     const list = el('ul', undefined, 'group-members');
     for (const [position, label] of students.entries()) {
       const row = el('li');
@@ -74,7 +90,7 @@ function renderGroups() {
       row.append(button);
       list.append(row);
     }
-    card.append(title, list);
+    card.append(list);
     return card;
   }));
 }
@@ -89,11 +105,29 @@ function clearExportStatus() {
   status.textContent = '';
 }
 
+function updateMoveTargets() {
+  for (const button of grid.querySelectorAll('[data-move-group]')) {
+    button.hidden = !selected || Number(button.dataset.moveGroup) === selected.group;
+  }
+}
+
 function clearSelection(message = instructions) {
   if (selected) buttonFor(selected).setAttribute('aria-pressed', 'false');
   selected = null;
   cancel.hidden = true;
   swapHelp.textContent = message;
+  updateMoveTargets();
+}
+
+function applyEdit(nextGroups, destination, action, message) {
+  lastEdit = { groups, member: selected, action };
+  clearSelection(message);
+  groups = nextGroups;
+  clearExportStatus();
+  undo.textContent = 'Undo ' + action;
+  undo.hidden = false;
+  renderGroups();
+  buttonFor(destination).focus();
 }
 
 function focusResults() {
@@ -135,7 +169,7 @@ form.addEventListener('submit', event => {
   const roster = labels ?? Array.from({ length: size }, (_, index) => `Student ${index + 1}`);
   groups = shuffleGroups(roster, count);
   clearSelection();
-  lastSwap = null;
+  lastEdit = null;
   undo.hidden = true;
   clearExportStatus();
   renderGroups();
@@ -151,6 +185,16 @@ form.addEventListener('submit', event => {
 });
 
 grid.addEventListener('click', event => {
+  const target = event.target.closest('[data-move-group]');
+  if (target && selected) {
+    const group = Number(target.dataset.moveGroup);
+    if (group === selected.group) return;
+    const destination = { group, position: groups[group].length };
+    const message = `${memberLabel(selected)} moved to Group ${group + 1}.`;
+    applyEdit(moveStudent(groups, selected, group), destination, 'move', message);
+    return;
+  }
+
   const button = event.target.closest('.group-member');
   if (!button) return;
 
@@ -159,24 +203,19 @@ grid.addEventListener('click', event => {
     selected = member;
     button.setAttribute('aria-pressed', 'true');
     cancel.hidden = false;
-    swapHelp.textContent = `${memberLabel(member)} selected. Choose a student in another group.`;
+    swapHelp.textContent = `${memberLabel(member)} selected. ${selectedInstructions}`;
+    updateMoveTargets();
     return;
   }
   if (selected.group === member.group) {
     if (selected.position === member.position) clearSelection();
-    else swapHelp.textContent = 'Choose a student in a different group to make the swap.';
+    else swapHelp.textContent = selectedInstructions;
     return;
   }
 
   const first = selected;
   const message = `${memberLabel(first)} and ${memberLabel(member)} swapped groups.`;
-  groups = swapStudents(groups, first, member);
-  lastSwap = [first, member];
-  clearSelection(message);
-  clearExportStatus();
-  undo.hidden = false;
-  renderGroups();
-  buttonFor(first).focus();
+  applyEdit(swapStudents(groups, first, member), first, 'swap', message);
 });
 
 cancel.addEventListener('click', () => {
@@ -186,14 +225,15 @@ cancel.addEventListener('click', () => {
 });
 
 undo.addEventListener('click', () => {
-  const [first, second] = lastSwap;
-  groups = swapStudents(groups, first, second);
-  lastSwap = null;
-  clearSelection('Swap undone. Select two students in different groups to swap them.');
+  const previous = lastEdit;
+  lastEdit = null;
+  const action = previous.action === 'move' ? 'Move' : 'Swap';
+  clearSelection(`${action} undone. ${instructions}`);
+  groups = previous.groups;
   clearExportStatus();
   undo.hidden = true;
   renderGroups();
-  buttonFor(first).focus();
+  buttonFor(previous.member).focus();
 });
 
 copy.addEventListener('click', async () => {

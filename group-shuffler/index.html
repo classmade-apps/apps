@@ -26,10 +26,10 @@ SOFTWARE.
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Classroom Group Shuffler | Classmade</title>
-  <meta name="description" content="Make random classroom groups from student numbers or a pasted list. Swap two students, then copy or print your groups. The roster stays in your browser.">
+  <meta name="description" content="Make random classroom groups from student numbers or a pasted list. Move a student or swap two, then copy or print your groups.">
   <meta name="theme-color" content="#204d3d">
   <meta property="og:title" content="Classroom Group Shuffler | Classmade">
-  <meta property="og:description" content="Shuffle your class into groups, swap individual students, and copy or print the result.">
+  <meta property="og:description" content="Shuffle your class into groups, move or swap students, and copy or print the result.">
   <meta property="og:type" content="website">
   <style>
 :root{--ink:#203d32;--green:#204d3d;--paper:#fafbf7;--line:#dbe2d8;--muted:#52685d;--lilac:#ddd1f2;--lime:#e6f2b8;--white:#fff;--orange:#f6dfb9;font-family:Avenir,'Avenir Next','Segoe UI',sans-serif;color:var(--ink);background:var(--paper);font-synthesis:none}*{box-sizing:border-box}body{margin:0}a{color:inherit;text-underline-offset:4px}button,input,textarea,select{font:inherit}button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}:focus-visible{outline:3px solid #8057ba;outline-offset:4px}button{cursor:pointer}button:disabled{cursor:default;opacity:.55}a.button{text-decoration:none}button,.button{min-height:46px;border-radius:9px;padding:11px 19px;border:1px solid var(--green);background:var(--green);color:white;font-weight:650;display:inline-flex;justify-content:center;align-items:center;gap:9px}button:hover,.button:hover{filter:brightness(.94)}button.secondary,.button.secondary{background:transparent;color:var(--green);border-color:#a8baae}button.quiet{background:white;color:var(--green);border-color:var(--line)}.skip{position:absolute;left:16px;top:-100px;z-index:10;background:white;padding:12px}.skip:focus{top:10px}.wrap{max-width:1160px;padding:0 36px;margin:auto}header{height:100px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-size:23px;font-weight:800;letter-spacing:-1px;display:flex;align-items:center;gap:10px;text-decoration:none}.brand img{width:35px;height:35px}nav{display:flex;align-items:center;gap:32px;font-size:15px;font-weight:600}nav a{text-decoration:none}nav a[aria-current=page]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:9px}.hero{display:grid;grid-template-columns:1.12fr 1fr;gap:68px;padding:65px 0 76px;align-items:center}.pill{display:inline-block;border:1px solid var(--line);border-radius:30px;padding:6px 12px;font-size:13px;background:white}.hero h1{font-size:clamp(42px,5.2vw,64px);line-height:1.08;letter-spacing:-2.8px;margin:23px 0}.hero p{font-size:18px;line-height:1.7;max-width:450px;color:var(--muted)}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 18px}.small{font-size:13px;line-height:1.6;color:var(--muted)}.hero-art{position:relative;padding:25px 18px 32px 6px}.timer-paper{background:var(--lilac);border-radius:18px;padding:28px 32px 36px;transform:rotate(-3deg);box-shadow:8px 9px 0 #c7d6b5;color:#332b48}.timer-paper .art-top{display:flex;justify-content:space-between;font-weight:650;font-size:14px}.clock-art{margin:30px auto 26px;border:14px solid #bba2dc;border-right-color:#eee5f8;width:220px;height:220px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:700;letter-spacing:-2px;font-variant-numeric:tabular-nums}.art-foot{display:flex;justify-content:center;gap:10px}.art-foot span{padding:8px 22px;background:#f1eafa;border-radius:7px;font-size:13px}.note{position:absolute;right:-6px;bottom:0;background:var(--lime);border:1px solid #cfdda4;border-radius:4px;padding:16px 22px;transform:rotate(4deg);font-size:15px;box-shadow:0 4px 12px #203d320a}.note strong{display:block;margin-bottom:4px}.section{padding:62px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:28px}h2{font-size:32px;line-height:1.2;letter-spacing:-1px;margin:0 0 12px}h3{font-size:21px;letter-spacing:-.4px;margin:0 0 12px}p{line-height:1.65}p.sub{color:var(--muted);margin:0;max-width:630px}.divider{border-top:1px solid var(--line)}.tool-feature{display:grid;grid-template-columns:1fr 1fr;background:#edf1e8;border:1px solid var(--line);border-radius:14px;overflow:hidden}.tool-picture{padding:38px;display:flex;align-items:center;justify-content:center;background:#e0e8d8;min-height:250px}.tiny-timer{background:#fff;border-radius:13px;width:260px;padding:24px;text-align:center;box-shadow:0 8px 22px #203d320a}.tiny-timer b{display:block;font-size:50px;letter-spacing:-2px;margin:10px 0}.tiny-timer span{font-size:13px;color:var(--muted)}.tiny-bar{height:7px;border-radius:10px;background:var(--lilac);margin:12px 0}.tool-info{padding:37px 42px}.tool-info h3{font-size:28px;margin-top:14px}.tag{display:inline-block;font-size:12px;font-weight:650;border-radius:5px;background:white;padding:5px 9px}.how{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:35px}.step-num{width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:var(--lime);border-radius:50%;margin-bottom:20px;font-weight:700}.how p{color:var(--muted);font-size:15px}.invitation{padding:42px;border-radius:14px;background:var(--lilac);display:flex;align-items:center;justify-content:space-between;gap:30px;margin:0 0 64px}.invitation p{margin:0;max-width:570px}.footer{border-top:1px solid var(--line);padding:30px 0 35px;display:flex;justify-content:space-between;gap:25px;font-size:13px;color:var(--muted)}.footer p{margin:4px 0}.footer a{margin-left:20px}.page-intro{padding:52px 0 30px}.page-intro h1{font-size:46px;letter-spacing:-1.8px;margin:0 0 15px;line-height:1.15}.page-intro p{max-width:680px;color:var(--muted);font-size:17px}.notice{padding:15px 19px;border:1px solid #ccdab2;background:#f0f5e5;border-radius:9px;font-size:14px;line-height:1.65;margin:20px 0 28px}.board-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:32px;padding-bottom:60px}.filters{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.filters button{font-size:13px;min-height:36px;padding:7px 12px;background:white;color:var(--green);border:1px solid var(--line)}.filters button[aria-pressed=true]{background:var(--green);color:white}.request{padding:24px 0;border-bottom:1px solid var(--line);display:flex;gap:20px;align-items:start}.vote{flex:0 0 53px;padding:8px 5px;min-height:67px;background:white;color:var(--green);border:1px solid var(--line);flex-direction:column;gap:3px}.vote[aria-pressed=true]{background:var(--lime);border-color:#98ab6f}.request h3{font-size:18px;margin:10px 0 7px}.request p{font-size:14px;color:var(--muted);margin:0 0 12px;white-space:pre-wrap;overflow-wrap:anywhere}.request-body{min-width:0;flex:1}.status{font-size:12px;padding:5px 8px;border-radius:5px;background:#e9edf1;display:inline-block}.status.planned{background:var(--lilac)}.status.in-progress{background:var(--orange)}.status.completed{background:var(--lime)}.status.not-planned{background:#ede5e1}.sample{font-size:11px;color:var(--muted);margin-left:8px}.text-button{background:transparent;color:var(--green);border:0;padding:0;min-height:32px;text-decoration:underline;font-size:13px}.form-panel{background:white;border:1px solid var(--line);border-radius:12px;padding:23px;height:fit-content;margin-top:20px}.form-panel p{font-size:14px;color:var(--muted)}label{display:block;font-size:14px;font-weight:650;margin:18px 0 7px}input,textarea,select{width:100%;padding:12px;border:1px solid #a9b8ae;border-radius:7px;background:white;color:var(--ink)}textarea{resize:vertical;min-height:110px}form button[type=submit]{margin-top:18px;width:100%}.message{font-size:14px;color:var(--green);line-height:1.5}.feedback{margin:16px 0 0;padding:18px;background:#edf1e8;border-radius:8px}.feedback h4{margin:0 0 12px}.feedback ul{padding-left:18px}.feedback li{font-size:14px;line-height:1.6;margin:10px 0;overflow-wrap:anywhere;white-space:pre-wrap}.feedback textarea{min-height:80px}.search-box{max-width:580px;margin:0 0 30px}.empty{padding:35px 15px;color:var(--muted);border:1px dashed var(--line);border-radius:9px}.crumb{font-size:14px;padding-top:25px;color:var(--muted)}.tool-heading{display:flex;align-items:center;justify-content:space-between;gap:30px}.tool-heading .page-intro{padding:35px 0 20px}.timer-shell{background:#e5eddf;border:1px solid #d6e0ce;padding:34px;border-radius:16px;text-align:center;max-width:900px;margin:0 auto 50px}.timer-shell:fullscreen{max-width:none;width:100%;height:100%;border-radius:0;display:flex;flex-direction:column;justify-content:center;overflow:auto}.timer-label{max-width:400px;margin:auto}.timer-label input{text-align:center;background:transparent;border:0;font-weight:650;font-size:18px}.time-display{font-size:clamp(70px,12vw,124px);font-weight:650;line-height:1.3;letter-spacing:-5px;font-variant-numeric:tabular-nums;margin:10px 0}.time-display.done{color:#78451c}.progress{height:9px;background:#cad7c3;border-radius:9px;max-width:570px;margin:0 auto 24px;overflow:hidden}.progress span{display:block;height:100%;background:var(--green);width:100%;transition:width .2s}.presets{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.presets button{background:transparent;border-color:#a9bba1;color:var(--green);min-height:38px;padding:7px 14px;font-size:14px}.timer-actions{justify-content:center}.custom-time{display:flex;justify-content:center;align-items:end;gap:10px;margin-top:20px}.custom-time label{margin:0;text-align:left;font-size:12px}.custom-time input{width:95px;margin-top:6px}.custom-time button{background:white;color:var(--green);border-color:#a9bba1}.sound-label{display:flex;justify-content:center;align-items:center;gap:8px;font-weight:400;font-size:13px}.sound-label input{width:17px;height:17px}.tool-details{max-width:850px;margin:auto;padding-bottom:55px}.tool-details h2{font-size:25px;margin-top:30px}.tool-details li{line-height:1.8;margin:8px 0;color:var(--muted)}.hidden,[hidden]{display:none!important}.library-list{padding-bottom:65px}.count{color:var(--muted);font-size:13px;margin:15px 0}dialog{width:min(480px,90vw);border:1px solid var(--line);border-radius:15px;padding:30px;color:var(--ink)}dialog::backdrop{background:#203d3270}@media(max-width:800px){.wrap{padding:0 23px}header{height:85px}nav{gap:20px}.hero{gap:25px;padding:35px 0 55px}.hero h1{font-size:46px;letter-spacing:-2px}.hero-art{padding:15px 10px}.timer-paper{padding:25px 20px}.clock-art{width:180px;height:180px;font-size:42px}.board-layout{grid-template-columns:1fr}.form-panel{grid-row:1}.how{gap:24px}.tool-info{padding:26px}.tool-picture{padding:24px}.note{right:0;padding:13px;font-size:13px}}@media(max-width:600px){.brand{font-size:20px}.brand img{width:30px;height:30px}header{gap:12px;flex-wrap:wrap;height:auto;padding:20px 0}nav{gap:18px;font-size:13px}nav .nav-about{display:none}.hero{grid-template-columns:1fr;padding-top:24px;gap:25px}.hero h1{font-size:49px;max-width:420px}.hero p{font-size:17px}.hero-art{max-width:360px;width:100%;margin:0 auto}.clock-art{width:180px;height:180px}.timer-paper{padding:22px}.section{padding:40px 0}.section-head{align-items:start;flex-direction:column;gap:8px}h2{font-size:28px}.tool-feature{grid-template-columns:1fr}.tool-picture{min-height:210px}.tool-info{padding:28px}.how{grid-template-columns:1fr;gap:18px}.step-num{float:left;margin-right:15px;margin-bottom:0}.how h3{padding-top:4px}.how p{margin-left:49px}.invitation{padding:28px;display:block;margin-bottom:40px}.invitation .button{margin-top:22px}.footer{flex-direction:column}.footer a{margin:0 20px 0 0}.page-intro{padding-top:30px}.page-intro h1{font-size:38px}.tool-heading{display:block}.tool-heading>.button{margin-bottom:22px}.timer-shell{padding:22px 15px}.request{gap:13px}.custom-time{gap:7px}.custom-time input{width:80px}.time-display{letter-spacing:-3px}.notice{font-size:13px}.form-panel{padding:20px}.timer-actions button{min-width:110px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
@@ -751,17 +751,33 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
   background: var(--home-paper);
 }
 
-.group-card h3 {
-  margin: 0;
-  padding: 10px 12px;
+.group-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 52px;
+  padding: 3px 8px 3px 12px;
   border-radius: 9px 9px 0 0;
   border-bottom: 1px solid var(--home-plum);
   background: var(--home-lilac);
-  font-size: 1.05rem;
 }
 
-.group-card:nth-child(3n + 2) h3 { background: var(--home-lime); }
-.group-card:nth-child(3n) h3 { background: var(--home-coral); }
+.group-card-heading h3 { margin: 0; font-size: 1.05rem; }
+.group-card:nth-child(3n + 2) .group-card-heading { background: var(--home-lime); }
+.group-card:nth-child(3n) .group-card-heading { background: var(--home-coral); }
+
+.group-move {
+  min-height: 44px;
+  padding: 5px 8px;
+  border-color: var(--home-plum);
+  background: var(--home-paper);
+  color: var(--home-ink);
+  font-size: .8rem;
+}
+
+.group-empty-card { margin: 0; padding: 12px; font-size: .875rem; color: var(--muted); }
 
 .group-members { display: grid; gap: 4px; margin: 0; padding: 6px; list-style: none; }
 
@@ -790,7 +806,7 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
 
 @media print {
   .group-page, .group-output, .group-card { background: white; color: black; }
-  .group-page :is(.skip, .home-header, .crumb, .group-intro, .group-setup, .group-guide, .footer, .group-output-actions, .group-swap, .group-copy-dialog, #group-export-status) {
+  .group-page :is(.skip, .home-header, .crumb, .group-intro, .group-setup, .group-guide, .footer, .group-output-actions, .group-swap, .group-move, .group-copy-dialog, #group-export-status) {
     display: none !important;
   }
   .group-page .wrap, .group-output { max-width: none; padding: 0; }
@@ -798,7 +814,7 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
   .group-output { border: 0; box-shadow: none; }
   .group-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10pt; }
   .group-card { break-inside: avoid; border-color: #666; }
-  .group-card h3 { background: #eee !important; border-color: #666; }
+  .group-card-heading { min-height: 0; padding: 5pt 7pt; background: #eee !important; border-color: #666; }
   .group-member[aria-pressed], .group-member { min-height: 0; padding: 2pt 4pt; background: transparent; color: black; border: 0; font-size: 10pt; }
 }
 
@@ -814,7 +830,7 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
     <main id="main">
       <section class="page-intro group-intro">
         <h1>Group <span class="home-highlight">shuffler</span></h1>
-        <p>Shuffle your class into groups and swap any two students between groups.</p>
+        <p>Shuffle your class into groups, then move or swap students.</p>
       </section>
 
       <noscript><p class="notice">Enable JavaScript to make and adjust your groups.</p></noscript>
@@ -868,9 +884,9 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
             <p>Choose your class size or paste a roster, then shuffle.</p>
           </div>
           <div class="group-swap" id="group-swap" hidden>
-            <p id="group-swap-help" role="status">Select two students in different groups to swap them.</p>
-            <button type="button" class="secondary" id="group-cancel" hidden>Cancel swap</button>
-            <button type="button" class="secondary" id="group-undo" hidden>Undo swap</button>
+            <p id="group-swap-help" role="status">Select a student to move or swap.</p>
+            <button type="button" class="secondary" id="group-cancel" hidden>Cancel selection</button>
+            <button type="button" class="secondary" id="group-undo" hidden>Undo</button>
           </div>
           <p id="group-export-status" class="small" role="status" hidden></p>
           <div class="group-grid" id="group-grid"></div>
@@ -935,8 +951,18 @@ function swapStudents(groups, first, second) {
   return swapped;
 }
 
+function moveStudent(groups, student, destination) {
+  const moved = groups.map(group => [...group]);
+  const [label] = moved[student.group].splice(student.position, 1);
+  moved[destination].push(label);
+  return moved;
+}
+
 function formatGroups(groups) {
-  return groups.map((students, index) => [`Group ${index + 1}`, ...students.map(label => `- ${label}`)].join('\n')).join('\n\n');
+  return groups.map((students, index) => {
+    const members = students.length ? students.map(label => `- ${label}`) : ['Empty group'];
+    return [`Group ${index + 1}`, ...members].join('\n');
+  }).join('\n\n');
 }
 
 
@@ -954,11 +980,12 @@ const cancel = byId('cancel');
 const undo = byId('undo');
 const copy = byId('copy');
 const copyDialog = byId('copy-dialog');
-const instructions = 'Select two students in different groups to swap them.';
+const instructions = 'Select a student to move or swap.';
+const selectedInstructions = 'Choose Move here in another group, or select another student to swap.';
 
 let groups = [];
 let selected = null;
-let lastSwap = null;
+let lastEdit = null;
 
 const usesLabels = () => form.elements['roster-mode'].value === 'labels';
 const memberLabel = member => groups[member.group][member.position];
@@ -1001,6 +1028,19 @@ function renderGroups() {
     const title = el('h3', `Group ${group + 1}`);
     title.id = `group-card-${group + 1}`;
     card.setAttribute('aria-labelledby', title.id);
+    const heading = el('div', undefined, 'group-card-heading');
+    const move = el('button', 'Move here', 'group-move');
+    move.type = 'button';
+    move.dataset.moveGroup = group;
+    move.setAttribute('aria-label', `Move here to Group ${group + 1}`);
+    move.hidden = true;
+    heading.append(title, move);
+    card.append(heading);
+
+    if (!students.length) {
+      card.append(el('p', 'Empty group', 'group-empty-card'));
+      return card;
+    }
     const list = el('ul', undefined, 'group-members');
     for (const [position, label] of students.entries()) {
       const row = el('li');
@@ -1013,7 +1053,7 @@ function renderGroups() {
       row.append(button);
       list.append(row);
     }
-    card.append(title, list);
+    card.append(list);
     return card;
   }));
 }
@@ -1028,11 +1068,29 @@ function clearExportStatus() {
   status.textContent = '';
 }
 
+function updateMoveTargets() {
+  for (const button of grid.querySelectorAll('[data-move-group]')) {
+    button.hidden = !selected || Number(button.dataset.moveGroup) === selected.group;
+  }
+}
+
 function clearSelection(message = instructions) {
   if (selected) buttonFor(selected).setAttribute('aria-pressed', 'false');
   selected = null;
   cancel.hidden = true;
   swapHelp.textContent = message;
+  updateMoveTargets();
+}
+
+function applyEdit(nextGroups, destination, action, message) {
+  lastEdit = { groups, member: selected, action };
+  clearSelection(message);
+  groups = nextGroups;
+  clearExportStatus();
+  undo.textContent = 'Undo ' + action;
+  undo.hidden = false;
+  renderGroups();
+  buttonFor(destination).focus();
 }
 
 function focusResults() {
@@ -1074,7 +1132,7 @@ form.addEventListener('submit', event => {
   const roster = labels ?? Array.from({ length: size }, (_, index) => `Student ${index + 1}`);
   groups = shuffleGroups(roster, count);
   clearSelection();
-  lastSwap = null;
+  lastEdit = null;
   undo.hidden = true;
   clearExportStatus();
   renderGroups();
@@ -1090,6 +1148,16 @@ form.addEventListener('submit', event => {
 });
 
 grid.addEventListener('click', event => {
+  const target = event.target.closest('[data-move-group]');
+  if (target && selected) {
+    const group = Number(target.dataset.moveGroup);
+    if (group === selected.group) return;
+    const destination = { group, position: groups[group].length };
+    const message = `${memberLabel(selected)} moved to Group ${group + 1}.`;
+    applyEdit(moveStudent(groups, selected, group), destination, 'move', message);
+    return;
+  }
+
   const button = event.target.closest('.group-member');
   if (!button) return;
 
@@ -1098,24 +1166,19 @@ grid.addEventListener('click', event => {
     selected = member;
     button.setAttribute('aria-pressed', 'true');
     cancel.hidden = false;
-    swapHelp.textContent = `${memberLabel(member)} selected. Choose a student in another group.`;
+    swapHelp.textContent = `${memberLabel(member)} selected. ${selectedInstructions}`;
+    updateMoveTargets();
     return;
   }
   if (selected.group === member.group) {
     if (selected.position === member.position) clearSelection();
-    else swapHelp.textContent = 'Choose a student in a different group to make the swap.';
+    else swapHelp.textContent = selectedInstructions;
     return;
   }
 
   const first = selected;
   const message = `${memberLabel(first)} and ${memberLabel(member)} swapped groups.`;
-  groups = swapStudents(groups, first, member);
-  lastSwap = [first, member];
-  clearSelection(message);
-  clearExportStatus();
-  undo.hidden = false;
-  renderGroups();
-  buttonFor(first).focus();
+  applyEdit(swapStudents(groups, first, member), first, 'swap', message);
 });
 
 cancel.addEventListener('click', () => {
@@ -1125,14 +1188,15 @@ cancel.addEventListener('click', () => {
 });
 
 undo.addEventListener('click', () => {
-  const [first, second] = lastSwap;
-  groups = swapStudents(groups, first, second);
-  lastSwap = null;
-  clearSelection('Swap undone. Select two students in different groups to swap them.');
+  const previous = lastEdit;
+  lastEdit = null;
+  const action = previous.action === 'move' ? 'Move' : 'Swap';
+  clearSelection(`${action} undone. ${instructions}`);
+  groups = previous.groups;
   clearExportStatus();
   undo.hidden = true;
   renderGroups();
-  buttonFor(first).focus();
+  buttonFor(previous.member).focus();
 });
 
 copy.addEventListener('click', async () => {

@@ -33,6 +33,16 @@ export function swapStudents(groups, first, second) {
   return swapped;
 }
 
+export function moveStudent(groups, student, destination) {
+  const moved = groups.map(group => [...group]);
+  const [label] = moved[student.group].splice(student.position, 1);
+  moved[destination].push(label);
+  return moved;
+}
+
 export function formatGroups(groups) {
-  return groups.map((students, index) => [`Group ${index + 1}`, ...students.map(label => `- ${label}`)].join('\n')).join('\n\n');
+  return groups.map((students, index) => {
+    const members = students.length ? students.map(label => `- ${label}`) : ['Empty group'];
+    return [`Group ${index + 1}`, ...members].join('\n');
+  }).join('\n\n');
 }

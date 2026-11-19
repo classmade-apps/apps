@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Classroom Group Shuffler | Classmade</title>
-  <meta name="description" content="Make random classroom groups from student numbers or a pasted list. Swap two students, then copy or print your groups. The roster stays in your browser.">
+  <meta name="description" content="Make random classroom groups from student numbers or a pasted list. Move a student or swap two, then copy or print your groups.">
   <meta name="theme-color" content="#204d3d">
   <meta property="og:title" content="Classroom Group Shuffler | Classmade">
-  <meta property="og:description" content="Shuffle your class into groups, swap individual students, and copy or print the result.">
+  <meta property="og:description" content="Shuffle your class into groups, move or swap students, and copy or print the result.">
   <meta property="og:type" content="website">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/styles.css">
@@ -25,7 +25,7 @@
       <nav class="crumb" aria-label="Breadcrumb"><a href="/apps/">App library</a><span aria-hidden="true">/</span><span aria-current="page">Group shuffler</span></nav>
       <section class="page-intro group-intro">
         <h1>Group <span class="home-highlight">shuffler</span></h1>
-        <p>Shuffle your class into groups and swap any two students between groups.</p>
+        <p>Shuffle your class into groups, then move or swap students.</p>
       </section>
 
       <noscript><p class="notice">Enable JavaScript to make and adjust your groups.</p></noscript>
@@ -79,9 +79,9 @@
             <p>Choose your class size or paste a roster, then shuffle.</p>
           </div>
           <div class="group-swap" id="group-swap" hidden>
-            <p id="group-swap-help" role="status">Select two students in different groups to swap them.</p>
-            <button type="button" class="secondary" id="group-cancel" hidden>Cancel swap</button>
-            <button type="button" class="secondary" id="group-undo" hidden>Undo swap</button>
+            <p id="group-swap-help" role="status">Select a student to move or swap.</p>
+            <button type="button" class="secondary" id="group-cancel" hidden>Cancel selection</button>
+            <button type="button" class="secondary" id="group-undo" hidden>Undo</button>
           </div>
           <p id="group-export-status" class="small" role="status" hidden></p>
           <div class="group-grid" id="group-grid"></div>
@@ -102,8 +102,8 @@
         <p>Use <strong>Student numbers</strong> and enter your class size to group students by number. If you want names or initials on the groups, choose <strong>Paste labels</strong> and enter one label per line.</p>
         <p>Set the number of groups you need and select <strong>Shuffle groups</strong>. Everyone gets assigned to one group, and group sizes differ by at most one student. For example, 26 students in six groups gives you two groups of five and four groups of four.</p>
 
-        <h3>Swap two students</h3>
-        <p>Select one student, then select a student in a different group. They trade places and everyone else stays in their group. Choose <strong>Undo swap</strong> to reverse the last swap, or <strong>Shuffle groups</strong> to start over with a fresh draw.</p>
+        <h3>Move or swap students</h3>
+        <p>Select one student. To move them, choose <strong>Move here</strong> in the destination group. To swap, select a student in another group and the two students will trade places. Use <strong>Undo move</strong> or <strong>Undo swap</strong> to reverse the last change.</p>
 
         <h3>Share the finished groups</h3>
         <p>Use <strong>Copy groups</strong> to paste the assignments into a slide or document. <strong>Print groups</strong> prints just the group lists and their headings. The roster stays in the open tab, so copy or print the groups before closing it.</p>

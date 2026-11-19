@@ -153,17 +153,33 @@
   background: var(--home-paper);
 }
 
-.group-card h3 {
-  margin: 0;
-  padding: 10px 12px;
+.group-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 52px;
+  padding: 3px 8px 3px 12px;
   border-radius: 9px 9px 0 0;
   border-bottom: 1px solid var(--home-plum);
   background: var(--home-lilac);
-  font-size: 1.05rem;
 }
 
-.group-card:nth-child(3n + 2) h3 { background: var(--home-lime); }
-.group-card:nth-child(3n) h3 { background: var(--home-coral); }
+.group-card-heading h3 { margin: 0; font-size: 1.05rem; }
+.group-card:nth-child(3n + 2) .group-card-heading { background: var(--home-lime); }
+.group-card:nth-child(3n) .group-card-heading { background: var(--home-coral); }
+
+.group-move {
+  min-height: 44px;
+  padding: 5px 8px;
+  border-color: var(--home-plum);
+  background: var(--home-paper);
+  color: var(--home-ink);
+  font-size: .8rem;
+}
+
+.group-empty-card { margin: 0; padding: 12px; font-size: .875rem; color: var(--muted); }
 
 .group-members { display: grid; gap: 4px; margin: 0; padding: 6px; list-style: none; }
 
@@ -192,7 +208,7 @@
 
 @media print {
   .group-page, .group-output, .group-card { background: white; color: black; }
-  .group-page :is(.skip, .home-header, .crumb, .group-intro, .group-setup, .group-guide, .footer, .group-output-actions, .group-swap, .group-copy-dialog, #group-export-status) {
+  .group-page :is(.skip, .home-header, .crumb, .group-intro, .group-setup, .group-guide, .footer, .group-output-actions, .group-swap, .group-move, .group-copy-dialog, #group-export-status) {
     display: none !important;
   }
   .group-page .wrap, .group-output { max-width: none; padding: 0; }
@@ -200,6 +216,6 @@
   .group-output { border: 0; box-shadow: none; }
   .group-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10pt; }
   .group-card { break-inside: avoid; border-color: #666; }
-  .group-card h3 { background: #eee !important; border-color: #666; }
+  .group-card-heading { min-height: 0; padding: 5pt 7pt; background: #eee !important; border-color: #666; }
   .group-member[aria-pressed], .group-member { min-height: 0; padding: 2pt 4pt; background: transparent; color: black; border: 0; font-size: 10pt; }
 }
