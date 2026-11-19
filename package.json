@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node classroom-timer/build.mjs && node lesson-timer/build.mjs && node group-shuffler/build.mjs",
-    "test": "node --test classroom-timer/tests/*.test.mjs lesson-timer/tests/*.test.mjs group-shuffler/tests/*.test.mjs"
+    "build": "node classroom-timer/build.mjs && node lesson-timer/build.mjs && node group-shuffler/build.mjs && node cleanup-cue/build.mjs",
+    "test": "node --test classroom-timer/tests/*.test.mjs lesson-timer/tests/*.test.mjs group-shuffler/tests/*.test.mjs cleanup-cue/tests/*.test.mjs"
   },
   "engines": { "node": ">=22" }
 }

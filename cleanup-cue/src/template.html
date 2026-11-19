@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cleanup Cue Before the Bell | Classmade</title>
+  <meta name="description" content="Set your school bell time and get a classroom countdown and audible signal when it’s time to put supplies away.">
+  <meta name="theme-color" content="#204d3d">
+  <meta property="og:title" content="Cleanup Cue Before the Bell | Classmade">
+  <meta property="og:description" content="Pick your bell time and give students a clear signal to start cleaning up.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/home.css">
+  <link rel="stylesheet" href="/cleanup-cue.css">
+</head>
+<body class="home-page tools-page cleanup-page">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="home-header">
+      <a class="brand" href="/" aria-label="Classmade home"><span class="home-mark" aria-hidden="true">✱</span>classmade</a>
+      <nav aria-label="Main navigation"><a href="/apps/" aria-current="page">App library</a><a href="/requests/">Request board</a><a href="/about/">About</a></nav>
+    </header>
+    <main id="main">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="/apps/">App library</a><span aria-hidden="true">/</span><span aria-current="page">Cleanup cue</span></nav>
+      <section class="page-intro cleanup-intro">
+        <h1>Cleanup <span class="home-highlight">cue</span></h1>
+        <p>Give your class a heads-up before the bell.</p>
+      </section>
+
+      <noscript><p class="notice">Enable JavaScript to run the cleanup cue.</p></noscript>
+      <div class="cleanup-workspace" id="cleanup-workspace" hidden>
+        <form class="cleanup-settings" id="cleanup-settings" aria-labelledby="cleanup-settings-title" autocomplete="off" novalidate>
+          <h2 id="cleanup-settings-title">Set your bell time</h2>
+          <fieldset id="cleanup-fields">
+            <legend class="cleanup-sr">Cleanup schedule and sound</legend>
+            <div class="cleanup-time-fields">
+              <div>
+                <label for="cleanup-bell">Bell time</label>
+                <input type="time" id="cleanup-bell" required aria-describedby="cleanup-bell-error">
+                <p class="cleanup-error" id="cleanup-bell-error" hidden></p>
+              </div>
+              <div>
+                <label for="cleanup-lead">Minutes early</label>
+                <input type="number" id="cleanup-lead" min="1" max="120" step="1" inputmode="numeric" value="2" required aria-describedby="cleanup-lead-error">
+                <p class="cleanup-error" id="cleanup-lead-error" hidden></p>
+              </div>
+            </div>
+            <label class="check-label cleanup-repeat"><input type="checkbox" id="cleanup-repeat">Repeat on weekdays</label>
+            <button type="submit" class="cleanup-primary" id="cleanup-start">Start cue</button>
+            <p class="cleanup-error" id="cleanup-form-status" role="status"></p>
+            <details class="cleanup-audio">
+              <summary>Cue sound</summary>
+              <label for="cleanup-tone">Sound</label>
+              <div class="cleanup-audio-controls">
+                <div class="cleanup-audio-select">
+                  <select id="cleanup-tone">
+                    <option value="bell">Classroom bell</option>
+                    <option value="bright">Bright alert</option>
+                    <option value="off">Off</option>
+                  </select>
+                </div>
+                <button type="button" class="secondary" id="cleanup-preview">Preview sound</button>
+              </div>
+              <p class="small" id="cleanup-preview-status" role="status"></p>
+            </details>
+          </fieldset>
+          <p class="small cleanup-device">Uses your device’s clock. Keep this tab open and the device awake.</p>
+        </form>
+
+        <section class="timer-shell cleanup-stage" id="cleanup-stage" aria-label="Classroom cleanup display" data-phase="ready">
+          <div class="cleanup-stage-top">
+            <span id="cleanup-state">Ready to set up</span>
+            <button type="button" class="secondary" id="cleanup-fullscreen">Fullscreen</button>
+          </div>
+          <div class="cleanup-display">
+            <h2 id="cleanup-display-title" tabindex="-1">Cleanup starts in</h2>
+            <div class="cleanup-clock" id="cleanup-clock" role="timer" aria-label="Time until cleanup" aria-live="off">–:––</div>
+            <p id="cleanup-display-note">Set your bell time, then start the cue.</p>
+          </div>
+          <dl class="cleanup-timeline" id="cleanup-timeline" hidden>
+            <div><dt>Cleanup</dt><dd id="cleanup-at"></dd></div>
+            <div><dt>Bell</dt><dd id="cleanup-bell-at"></dd></div>
+          </dl>
+          <button type="button" class="secondary cleanup-stop" id="cleanup-stop" hidden>Stop cue</button>
+          <p class="cleanup-sr" id="cleanup-announcement" role="status"></p>
+          <p class="cleanup-stage-message" id="cleanup-stage-message" role="status"></p>
+        </section>
+      </div>
+
+      <dialog class="cleanup-presentation" id="cleanup-presentation" aria-label="Cleanup cue presentation"></dialog>
+
+      <section class="tool-details cleanup-guide" aria-labelledby="cleanup-guide-heading">
+        <h2 id="cleanup-guide-heading">How the cleanup cue works</h2>
+        <p>Enter the time your class ends and how many minutes early you want students to start putting things away. For a 2:45 p.m. bell with two minutes of cleanup, the cue starts at 2:43 p.m. Select <strong>Start cue</strong> to begin counting down.</p>
+        <p>When cleanup starts, the display switches to <strong>Time to clean up</strong>, plays a repeating signal for about four seconds, and counts down to the bell. Select <strong>Fullscreen</strong> for a projector, or open <strong>Cue sound</strong> to preview a sound or turn it off.</p>
+
+        <h3>Use the same bell time on school days</h3>
+        <p>Turn on <strong>Repeat on weekdays</strong> to use the same time Monday through Friday while the cue is running. Select <strong>Stop cue</strong> when you want to change the schedule. If you close or reload the page, select <strong>Start cue</strong> again to enable the countdown and sound.</p>
+        <p>To use the tool without internet, <a href="/downloads/cleanup-cue" download="cleanup-cue.html">download Cleanup Cue</a> and open the HTML file in your browser. You can also <a href="https://github.com/classmade-apps/apps/tree/main/cleanup-cue">view the source code on GitHub</a>.</p>
+        <p>For several timed activities in one class period, use the <a href="/apps/lesson-timer/">lesson timer</a>.</p>
+      </section>
+    </main>
+    <footer class="footer">
+      <div><strong>classmade</strong><p>Small classroom tools. Yours to make your own.</p></div>
+      <div><a href="/apps/">App library</a><a href="/about/">About</a><a href="/requests/">Share an idea</a><a href="/privacy/">Privacy &amp; contact</a><p>Free to use · No account needed</p></div>
+    </footer>
+  </div>
+  <script type="module" src="/cleanup-cue.js"></script>
+</body>
+</html>
