@@ -106,6 +106,9 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
   flex-basis: 100%;
   margin: 0;
 }
+.idea-source{display:inline-block;font-size:12px;padding:5px 8px;border-radius:5px;margin-left:8px;background:#fff;border:1px solid var(--line);color:var(--muted)}
+.request span.vote{display:inline-flex;align-items:center;justify-content:center;border-radius:9px;font-weight:650;font-size:14px}
+.idea-link{font-weight:650;font-size:14px}
 
 .home-page {
   --home-paper: #fff8eb;
@@ -264,6 +267,8 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
 .demo-controls button { min-height: 44px; padding: 7px 17px; font-weight: 800; border-radius: 100px; background: var(--home-lime); color: var(--home-ink); border: 1px solid var(--home-lime); }
 .demo-controls #demo-reset { background: transparent; color: var(--home-paper); border-color: #a1bda9; }
 .demo-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 13px; min-height: 30px; font-size: .9rem; }
+.demo-more { margin: 4px 0 0; font-size: .85rem; line-height: 1.45; }
+.demo-more a { display: inline-block; min-height: 24px; }
 .home-demo :focus-visible { outline-color: #ffadd6; }
 
 .home-feature-band { background: var(--home-lilac); border-block: 2px solid var(--home-plum); }
@@ -340,7 +345,9 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
 .tools-page .timer-shell :focus-visible { outline-color: #ffadd6; }
 .tools-page .timer-shell #start-pause { color: #0c241a; background: #cbfa32; border-color: #cbfa32; }
 .tools-page .timer-shell #reset,
+.tools-page .timer-shell #add-minute,
 .tools-page .timer-shell .presets button { color: #fff8eb; }
+.tools-page .timer-shell #add-minute { background: transparent; border-color: #a1bda9; }
 .tools-page .timer-shell .presets button[aria-pressed="true"] { background: #cbfa32; color: #0c241a; }
 .tools-page .timer-shell #time-display { margin-block: 6px; color: #cbfa32; }
 .tools-page .timer-shell #time-display.done { color: #ffadd6; }
@@ -700,6 +707,35 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
 .lesson-plan-heading span { font-size: .875rem; font-weight: 700; }
 .lesson-plan .small { margin: 6px 0 0; color: var(--home-ink); }
 .lesson-plan .small:empty { display: none; }
+.lesson-plan .lesson-class-picker { margin-top: 14px; }
+.lesson-class-picker label { margin: 0 0 7px; }
+.lesson-class-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.lesson-class-controls button { min-height: 44px; padding: 8px 10px; font-size: .875rem; }
+.lesson-class-dialog {
+  border: 2px solid var(--home-plum);
+  background: var(--home-paper);
+  box-shadow: 5px 6px 0 var(--home-plum);
+}
+
+.lesson-class-dialog h2 { font-size: 1.5rem; }
+.lesson-class-dialog #lesson-class-error:empty { display: none; }
+.lesson-class-dialog #lesson-class-error { color: #842922; }
+.lesson-class-dialog input[aria-invalid="true"] { border-color: #9b2e28; box-shadow: inset 0 0 0 1px #9b2e28; }
+.lesson-class-dialog-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+.lesson-class-dialog-actions button[type="submit"] {
+  width: auto;
+  margin: 0;
+  background: var(--home-lime);
+  color: var(--home-ink);
+  border-color: var(--home-plum);
+}
+
 .lesson-validation {
   display: flex;
   align-items: flex-start;
@@ -804,20 +840,22 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
 
 .lesson-sound label { margin: 0 0 7px; }
 .lesson-sound-controls { display: flex; flex-wrap: wrap; gap: 8px; }
-.lesson-sound-select {
+.lesson-select {
   position: relative;
   flex: 1 1 8rem;
+  min-width: 0;
 }
 
-.lesson-sound-select select {
+.lesson-select select {
   appearance: none;
   min-height: 44px;
   padding-inline-end: 2.25rem;
+  text-overflow: ellipsis;
   background: var(--home-paper);
   border-color: #997da5;
 }
 
-.lesson-sound-select::after {
+.lesson-select::after {
   content: "";
   position: absolute;
   inset-inline-end: 1rem;
@@ -831,8 +869,8 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
 }
 
 @media (forced-colors: active) {
-  .lesson-sound-select select { appearance: auto; padding-inline-end: 12px; }
-  .lesson-sound-select::after { content: none; }
+  .lesson-select select { appearance: auto; padding-inline-end: 12px; }
+  .lesson-select::after { content: none; }
 }
 
 .lesson-presentation {
@@ -937,7 +975,18 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
             <h2 id="lesson-plan-title">Lesson plan</h2>
             <span id="lesson-total">45 min total</span>
           </div>
-          <p class="small" id="lesson-plan-hint">Valid plans save in this browser.</p>
+          <p class="small" id="lesson-plan-hint">Valid class plans save in this browser.</p>
+          <fieldset class="lesson-class-picker" id="lesson-class-picker">
+            <legend class="lesson-sr">Class plans</legend>
+            <label for="lesson-class">Class plan</label>
+            <div class="lesson-class-controls">
+              <div class="lesson-select">
+                <select id="lesson-class"></select>
+              </div>
+              <button type="button" class="secondary" id="lesson-class-add">New class</button>
+              <button type="button" class="secondary" id="lesson-class-rename">Rename</button>
+            </div>
+          </fieldset>
           <div class="lesson-validation" id="lesson-validation" hidden>
             <span class="lesson-warning-icon" aria-hidden="true">!</span>
             <div>
@@ -954,7 +1003,7 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
           <div class="lesson-sound">
             <label for="lesson-sound-tone">Activity transition sound</label>
             <div class="lesson-sound-controls">
-              <div class="lesson-sound-select">
+              <div class="lesson-select">
                 <select id="lesson-sound-tone">
                   <option value="off">Off</option>
                   <option value="gentle">Gentle chime</option>
@@ -990,11 +1039,24 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
           </li>
         </template>
       </div>
+      <dialog class="lesson-class-dialog" id="lesson-class-dialog" aria-labelledby="lesson-class-dialog-title">
+        <form id="lesson-class-form" novalidate>
+          <h2 id="lesson-class-dialog-title">New class</h2>
+          <label for="lesson-class-name">Class name</label>
+          <input id="lesson-class-name" type="text" placeholder="e.g. Period 2" maxlength="50" required
+                 aria-describedby="lesson-class-error" autofocus>
+          <p id="lesson-class-error" class="small" role="status"></p>
+          <div class="lesson-class-dialog-actions">
+            <button type="button" class="secondary" id="lesson-class-cancel">Cancel</button>
+            <button type="submit" class="button" id="lesson-class-save">Create class</button>
+          </div>
+        </form>
+      </dialog>
       <dialog class="lesson-presentation" id="lesson-presentation" aria-label="Lesson presentation"></dialog>
     </main>
     <footer class="footer">
       <div><strong>classmade</strong><p>Small classroom tools. Yours to make your own.</p></div>
-      <div><a href="https://classmade.org/apps/">App library</a><a href="https://classmade.org/requests/">Share an idea</a><a href="https://classmade.org/privacy/">Privacy &amp; contact</a><p>Free to use · No account needed</p></div>
+      <div><a href="https://classmade.org/apps/">App library</a><a href="https://classmade.org/about/">About</a><a href="https://classmade.org/requests/">Share an idea</a><a href="https://classmade.org/privacy/">Privacy &amp; contact</a><p>Free to use · No account needed</p></div>
     </footer>
   </div>
   <script>
@@ -1039,6 +1101,23 @@ function isActivityDuration(minutes) {
 function isLessonPlan(plan) {
   return Array.isArray(plan) && plan.length >= 1 && plan.length <= maxActivities &&
     plan.every(activity => activity && isActivityName(activity.name) && isActivityDuration(activity.minutes));
+}
+
+function isClassName(name) {
+  return typeof name === 'string' && name.trim().length > 0 && name.length <= 50;
+}
+
+function restoreClassPlans(saved, legacy) {
+  const classes = saved?.classes;
+  if (Array.isArray(classes) && classes.length &&
+      classes.every(entry => isClassName(entry?.name) && isLessonPlan(entry.activities))) {
+    const selected = Number.isInteger(saved.selected) && classes[saved.selected] ? saved.selected : 0;
+    return { classes, selected };
+  }
+  return {
+    classes: [{ name: 'My class', activities: isLessonPlan(legacy) ? legacy : starterPlan }],
+    selected: 0,
+  };
 }
 
 class LessonTimer {
@@ -1130,6 +1209,10 @@ const workspace = byId('workspace');
 const stage = byId('stage');
 const presentation = byId('presentation');
 const form = byId('plan');
+const classPicker = byId('class-picker');
+const classSelect = byId('class');
+const classDialog = byId('class-dialog');
+const classNameInput = byId('class-name');
 const fields = byId('fields');
 const list = byId('activities');
 const template = byId('row');
@@ -1143,22 +1226,44 @@ const soundTone = byId('sound-tone');
 const soundPreview = byId('sound-preview');
 const soundStatus = byId('sound-status');
 const chime = createTimerChime();
-const storageKey = 'classmade-lesson-plan';
+const classPlansKey = 'classmade-lesson-class-plans';
+const legacyPlanKey = 'classmade-lesson-plan';
 const soundKey = 'classmade-lesson-sound';
 
-function loadPlan() {
+function readSaved(key) {
   try {
-    const saved = JSON.parse(localStorage.getItem(storageKey));
-    if (isLessonPlan(saved)) return saved;
+    return JSON.parse(localStorage.getItem(key));
   } catch {
-    // The starter plan also works when storage is unavailable.
+    return null;
   }
-  return starterPlan;
 }
 
-let timer = new LessonTimer(loadPlan());
+const classPlans = restoreClassPlans(readSaved(classPlansKey), readSaved(legacyPlanKey));
+const drafts = new Map();
+const selectedClass = () => classPlans.classes[classPlans.selected];
+let timer = new LessonTimer(selectedClass().activities);
+let renamingClass = false;
 let interval;
 let lastAnnouncement;
+
+function saveClassPlans() {
+  try {
+    localStorage.setItem(classPlansKey, JSON.stringify(classPlans));
+  } catch {
+    byId('plan-hint').textContent = 'Browser storage is unavailable. Keep this tab open to use your edits.';
+  }
+}
+
+function renderClassOptions() {
+  classSelect.replaceChildren(...classPlans.classes.map(({ name }, index) => new Option(name, String(index))));
+  classSelect.value = String(classPlans.selected);
+}
+
+function showClass(index) {
+  classPlans.selected = index;
+  timer = new LessonTimer(selectedClass().activities);
+  if (!renderRows(drafts.get(index) ?? timer.plan)) saveClassPlans();
+}
 
 function renderRows(plan) {
   list.replaceChildren(...plan.map((activity, index) => {
@@ -1189,7 +1294,7 @@ function renderRows(plan) {
     return row;
   }));
   add.disabled = plan.length >= maxActivities;
-  updatePlan();
+  return updatePlan();
 }
 
 function readPlan() {
@@ -1238,11 +1343,11 @@ function updatePlan() {
   start.textContent = valid ? 'Start lesson' : 'Fix lesson plan';
   if (valid) {
     timer = new LessonTimer(plan.map(activity => ({ ...activity, name: activity.name.trim() })));
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(timer.plan));
-    } catch {
-      byId('plan-hint').textContent = 'Browser storage is unavailable. Keep this tab open to use your edits.';
-    }
+    selectedClass().activities = timer.plan;
+    drafts.delete(classPlans.selected);
+    saveClassPlans();
+  } else {
+    drafts.set(classPlans.selected, plan);
   }
   renderStage();
   return valid;
@@ -1274,6 +1379,7 @@ function renderStage() {
   skip.hidden = ready || complete;
   reset.hidden = ready;
   fields.disabled = !ready;
+  classPicker.disabled = !ready && !complete;
   if (!ready) byId('plan-status').textContent = 'Reset the lesson to edit the plan.';
 
   if (active === start && start.hidden) pause.focus();
@@ -1320,6 +1426,51 @@ function startClock() {
   renderStage();
   interval = setInterval(tick, 200);
 }
+
+function showClassNameError(message) {
+  classNameInput.setAttribute('aria-invalid', String(Boolean(message)));
+  byId('class-error').textContent = message;
+}
+
+function openClassDialog(rename) {
+  renamingClass = rename;
+  byId('class-dialog-title').textContent = rename ? 'Rename class' : 'New class';
+  byId('class-save').textContent = rename ? 'Save name' : 'Create class';
+  classNameInput.value = rename ? selectedClass().name : '';
+  showClassNameError('');
+  classDialog.showModal();
+  classNameInput.select();
+}
+
+classSelect.addEventListener('change', () => showClass(Number(classSelect.value)));
+byId('class-add').addEventListener('click', () => openClassDialog(false));
+byId('class-rename').addEventListener('click', () => openClassDialog(true));
+byId('class-cancel').addEventListener('click', () => classDialog.close());
+classNameInput.addEventListener('input', () => showClassNameError(''));
+
+byId('class-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const name = classNameInput.value.trim();
+  const duplicate = classPlans.classes.some((entry, index) =>
+    (!renamingClass || index !== classPlans.selected) && entry.name.trim().toLowerCase() === name.toLowerCase());
+  const error = !isClassName(name) ? 'Enter a class name (up to 50 characters).'
+    : duplicate ? 'A class already uses that name.' : '';
+  if (error) {
+    showClassNameError(error);
+    classNameInput.focus();
+    return;
+  }
+  if (renamingClass) {
+    selectedClass().name = name;
+    saveClassPlans();
+  } else {
+    classPlans.classes.push({ name, activities: starterPlan });
+    showClass(classPlans.classes.length - 1);
+  }
+  renderClassOptions();
+  classDialog.close();
+  classSelect.focus();
+});
 
 fields.addEventListener('input', () => updatePlan());
 form.addEventListener('submit', event => {
@@ -1447,7 +1598,8 @@ try {
   // Leave the sound off when browser storage is unavailable.
 }
 
-renderRows(timer.plan);
+renderClassOptions();
+showClass(classPlans.selected);
 workspace.hidden = false;
 
   </script>

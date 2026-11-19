@@ -1,4 +1,7 @@
-import { LessonTimer, isActivityDuration, isActivityName, isLessonPlan, maxActivities, starterPlan } from './lesson-timer-model.js';
+import {
+  LessonTimer, isActivityDuration, isActivityName, isClassName, isLessonPlan,
+  maxActivities, restoreClassPlans, starterPlan,
+} from './lesson-timer-model.js';
 import { formatTime } from './timer-model.js';
 import { createTimerChime } from './timer-chime.js';
 
@@ -7,6 +10,10 @@ const workspace = byId('workspace');
 const stage = byId('stage');
 const presentation = byId('presentation');
 const form = byId('plan');
+const classPicker = byId('class-picker');
+const classSelect = byId('class');
+const classDialog = byId('class-dialog');
+const classNameInput = byId('class-name');
 const fields = byId('fields');
 const list = byId('activities');
 const template = byId('row');
@@ -20,22 +27,44 @@ const soundTone = byId('sound-tone');
 const soundPreview = byId('sound-preview');
 const soundStatus = byId('sound-status');
 const chime = createTimerChime();
-const storageKey = 'classmade-lesson-plan';
+const classPlansKey = 'classmade-lesson-class-plans';
+const legacyPlanKey = 'classmade-lesson-plan';
 const soundKey = 'classmade-lesson-sound';
 
-function loadPlan() {
+function readSaved(key) {
   try {
-    const saved = JSON.parse(localStorage.getItem(storageKey));
-    if (isLessonPlan(saved)) return saved;
+    return JSON.parse(localStorage.getItem(key));
   } catch {
-    // The starter plan also works when storage is unavailable.
+    return null;
   }
-  return starterPlan;
 }
 
-let timer = new LessonTimer(loadPlan());
+const classPlans = restoreClassPlans(readSaved(classPlansKey), readSaved(legacyPlanKey));
+const drafts = new Map();
+const selectedClass = () => classPlans.classes[classPlans.selected];
+let timer = new LessonTimer(selectedClass().activities);
+let renamingClass = false;
 let interval;
 let lastAnnouncement;
+
+function saveClassPlans() {
+  try {
+    localStorage.setItem(classPlansKey, JSON.stringify(classPlans));
+  } catch {
+    byId('plan-hint').textContent = 'Browser storage is unavailable. Keep this tab open to use your edits.';
+  }
+}
+
+function renderClassOptions() {
+  classSelect.replaceChildren(...classPlans.classes.map(({ name }, index) => new Option(name, String(index))));
+  classSelect.value = String(classPlans.selected);
+}
+
+function showClass(index) {
+  classPlans.selected = index;
+  timer = new LessonTimer(selectedClass().activities);
+  if (!renderRows(drafts.get(index) ?? timer.plan)) saveClassPlans();
+}
 
 function renderRows(plan) {
   list.replaceChildren(...plan.map((activity, index) => {
@@ -66,7 +95,7 @@ function renderRows(plan) {
     return row;
   }));
   add.disabled = plan.length >= maxActivities;
-  updatePlan();
+  return updatePlan();
 }
 
 function readPlan() {
@@ -115,11 +144,11 @@ function updatePlan() {
   start.textContent = valid ? 'Start lesson' : 'Fix lesson plan';
   if (valid) {
     timer = new LessonTimer(plan.map(activity => ({ ...activity, name: activity.name.trim() })));
-    try {
-      localStorage.setItem(storageKey, JSON.stringify(timer.plan));
-    } catch {
-      byId('plan-hint').textContent = 'Browser storage is unavailable. Keep this tab open to use your edits.';
-    }
+    selectedClass().activities = timer.plan;
+    drafts.delete(classPlans.selected);
+    saveClassPlans();
+  } else {
+    drafts.set(classPlans.selected, plan);
   }
   renderStage();
   return valid;
@@ -151,6 +180,7 @@ function renderStage() {
   skip.hidden = ready || complete;
   reset.hidden = ready;
   fields.disabled = !ready;
+  classPicker.disabled = !ready && !complete;
   if (!ready) byId('plan-status').textContent = 'Reset the lesson to edit the plan.';
 
   if (active === start && start.hidden) pause.focus();
@@ -197,6 +227,51 @@ function startClock() {
   renderStage();
   interval = setInterval(tick, 200);
 }
+
+function showClassNameError(message) {
+  classNameInput.setAttribute('aria-invalid', String(Boolean(message)));
+  byId('class-error').textContent = message;
+}
+
+function openClassDialog(rename) {
+  renamingClass = rename;
+  byId('class-dialog-title').textContent = rename ? 'Rename class' : 'New class';
+  byId('class-save').textContent = rename ? 'Save name' : 'Create class';
+  classNameInput.value = rename ? selectedClass().name : '';
+  showClassNameError('');
+  classDialog.showModal();
+  classNameInput.select();
+}
+
+classSelect.addEventListener('change', () => showClass(Number(classSelect.value)));
+byId('class-add').addEventListener('click', () => openClassDialog(false));
+byId('class-rename').addEventListener('click', () => openClassDialog(true));
+byId('class-cancel').addEventListener('click', () => classDialog.close());
+classNameInput.addEventListener('input', () => showClassNameError(''));
+
+byId('class-form').addEventListener('submit', event => {
+  event.preventDefault();
+  const name = classNameInput.value.trim();
+  const duplicate = classPlans.classes.some((entry, index) =>
+    (!renamingClass || index !== classPlans.selected) && entry.name.trim().toLowerCase() === name.toLowerCase());
+  const error = !isClassName(name) ? 'Enter a class name (up to 50 characters).'
+    : duplicate ? 'A class already uses that name.' : '';
+  if (error) {
+    showClassNameError(error);
+    classNameInput.focus();
+    return;
+  }
+  if (renamingClass) {
+    selectedClass().name = name;
+    saveClassPlans();
+  } else {
+    classPlans.classes.push({ name, activities: starterPlan });
+    showClass(classPlans.classes.length - 1);
+  }
+  renderClassOptions();
+  classDialog.close();
+  classSelect.focus();
+});
 
 fields.addEventListener('input', () => updatePlan());
 form.addEventListener('submit', event => {
@@ -324,5 +399,6 @@ try {
   // Leave the sound off when browser storage is unavailable.
 }
 
-renderRows(timer.plan);
+renderClassOptions();
+showClass(classPlans.selected);
 workspace.hidden = false;

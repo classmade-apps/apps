@@ -109,6 +109,35 @@
 .lesson-plan-heading span { font-size: .875rem; font-weight: 700; }
 .lesson-plan .small { margin: 6px 0 0; color: var(--home-ink); }
 .lesson-plan .small:empty { display: none; }
+.lesson-plan .lesson-class-picker { margin-top: 14px; }
+.lesson-class-picker label { margin: 0 0 7px; }
+.lesson-class-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: stretch;
+  gap: 8px;
+}
+
+.lesson-class-controls button { min-height: 44px; padding: 8px 10px; font-size: .875rem; }
+.lesson-class-dialog {
+  border: 2px solid var(--home-plum);
+  background: var(--home-paper);
+  box-shadow: 5px 6px 0 var(--home-plum);
+}
+
+.lesson-class-dialog h2 { font-size: 1.5rem; }
+.lesson-class-dialog #lesson-class-error:empty { display: none; }
+.lesson-class-dialog #lesson-class-error { color: #842922; }
+.lesson-class-dialog input[aria-invalid="true"] { border-color: #9b2e28; box-shadow: inset 0 0 0 1px #9b2e28; }
+.lesson-class-dialog-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; margin-top: 18px; }
+.lesson-class-dialog-actions button[type="submit"] {
+  width: auto;
+  margin: 0;
+  background: var(--home-lime);
+  color: var(--home-ink);
+  border-color: var(--home-plum);
+}
+
 .lesson-validation {
   display: flex;
   align-items: flex-start;
@@ -213,20 +242,22 @@
 
 .lesson-sound label { margin: 0 0 7px; }
 .lesson-sound-controls { display: flex; flex-wrap: wrap; gap: 8px; }
-.lesson-sound-select {
+.lesson-select {
   position: relative;
   flex: 1 1 8rem;
+  min-width: 0;
 }
 
-.lesson-sound-select select {
+.lesson-select select {
   appearance: none;
   min-height: 44px;
   padding-inline-end: 2.25rem;
+  text-overflow: ellipsis;
   background: var(--home-paper);
   border-color: #997da5;
 }
 
-.lesson-sound-select::after {
+.lesson-select::after {
   content: "";
   position: absolute;
   inset-inline-end: 1rem;
@@ -240,8 +271,8 @@
 }
 
 @media (forced-colors: active) {
-  .lesson-sound-select select { appearance: auto; padding-inline-end: 12px; }
-  .lesson-sound-select::after { content: none; }
+  .lesson-select select { appearance: auto; padding-inline-end: 12px; }
+  .lesson-select::after { content: none; }
 }
 
 .lesson-presentation {

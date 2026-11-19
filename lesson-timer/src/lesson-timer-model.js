@@ -21,6 +21,23 @@ export function isLessonPlan(plan) {
     plan.every(activity => activity && isActivityName(activity.name) && isActivityDuration(activity.minutes));
 }
 
+export function isClassName(name) {
+  return typeof name === 'string' && name.trim().length > 0 && name.length <= 50;
+}
+
+export function restoreClassPlans(saved, legacy) {
+  const classes = saved?.classes;
+  if (Array.isArray(classes) && classes.length &&
+      classes.every(entry => isClassName(entry?.name) && isLessonPlan(entry.activities))) {
+    const selected = Number.isInteger(saved.selected) && classes[saved.selected] ? saved.selected : 0;
+    return { classes, selected };
+  }
+  return {
+    classes: [{ name: 'My class', activities: isLessonPlan(legacy) ? legacy : starterPlan }],
+    selected: 0,
+  };
+}
+
 export class LessonTimer {
   constructor(plan) {
     if (!isLessonPlan(plan)) throw new RangeError('Enter a name and 1 to 180 minutes for every activity.');

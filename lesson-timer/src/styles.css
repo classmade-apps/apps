@@ -72,3 +72,6 @@ nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
   flex-basis: 100%;
   margin: 0;
 }
+.idea-source{display:inline-block;font-size:12px;padding:5px 8px;border-radius:5px;margin-left:8px;background:#fff;border:1px solid var(--line);color:var(--muted)}
+.request span.vote{display:inline-flex;align-items:center;justify-content:center;border-radius:9px;font-weight:650;font-size:14px}
+.idea-link{font-weight:650;font-size:14px}

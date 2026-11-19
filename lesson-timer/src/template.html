@@ -22,6 +22,7 @@
       <nav aria-label="Main navigation"><a href="/apps/" aria-current="page">App library</a><a href="/requests/">Request board</a><a href="/about/">About</a></nav>
     </header>
     <main id="main">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="/apps/">App library</a><span aria-hidden="true">/</span><span aria-current="page">Lesson timer</span></nav>
       <div class="tool-heading">
         <section class="page-intro">
           <h1><span class="home-highlight">Lesson timer</span></h1>
@@ -61,7 +62,18 @@
             <h2 id="lesson-plan-title">Lesson plan</h2>
             <span id="lesson-total">45 min total</span>
           </div>
-          <p class="small" id="lesson-plan-hint">Valid plans save in this browser.</p>
+          <p class="small" id="lesson-plan-hint">Valid class plans save in this browser.</p>
+          <fieldset class="lesson-class-picker" id="lesson-class-picker">
+            <legend class="lesson-sr">Class plans</legend>
+            <label for="lesson-class">Class plan</label>
+            <div class="lesson-class-controls">
+              <div class="lesson-select">
+                <select id="lesson-class"></select>
+              </div>
+              <button type="button" class="secondary" id="lesson-class-add">New class</button>
+              <button type="button" class="secondary" id="lesson-class-rename">Rename</button>
+            </div>
+          </fieldset>
           <div class="lesson-validation" id="lesson-validation" hidden>
             <span class="lesson-warning-icon" aria-hidden="true">!</span>
             <div>
@@ -78,7 +90,7 @@
           <div class="lesson-sound">
             <label for="lesson-sound-tone">Activity transition sound</label>
             <div class="lesson-sound-controls">
-              <div class="lesson-sound-select">
+              <div class="lesson-select">
                 <select id="lesson-sound-tone">
                   <option value="off">Off</option>
                   <option value="gentle">Gentle chime</option>
@@ -114,11 +126,46 @@
           </li>
         </template>
       </div>
+      <dialog class="lesson-class-dialog" id="lesson-class-dialog" aria-labelledby="lesson-class-dialog-title">
+        <form id="lesson-class-form" novalidate>
+          <h2 id="lesson-class-dialog-title">New class</h2>
+          <label for="lesson-class-name">Class name</label>
+          <input id="lesson-class-name" type="text" placeholder="e.g. Period 2" maxlength="50" required
+                 aria-describedby="lesson-class-error" autofocus>
+          <p id="lesson-class-error" class="small" role="status"></p>
+          <div class="lesson-class-dialog-actions">
+            <button type="button" class="secondary" id="lesson-class-cancel">Cancel</button>
+            <button type="submit" class="button" id="lesson-class-save">Create class</button>
+          </div>
+        </form>
+      </dialog>
       <dialog class="lesson-presentation" id="lesson-presentation" aria-label="Lesson presentation"></dialog>
+      <section class="tool-details timer-guide lesson-guide">
+        <h2>How the lesson timer works</h2>
+        <p>The lesson timer is a free online timer for a whole class period. List your activities in order, give each one a length in minutes, then select <strong>Start lesson</strong>. Each countdown starts automatically when the previous one ends, so you don’t have to reset a timer between activities. The display shows the current activity, the time left, and what comes next.</p>
+        <p>If you teach more than one class, select <strong>New class</strong> to create a named plan. Choose the plan you want from the <strong>Class plan</strong> dropdown before starting. Each class keeps its own activities and durations.</p>
+        <p>Select <strong>Fullscreen</strong> to put the display on a projector or classroom screen. Use <strong>Pause</strong> when a discussion runs long, <strong>Skip activity</strong> to move on early, and <strong>Reset lesson</strong> to start the plan from the top. Turn on a gentle or bright chime if students need an audible cue when it’s time to switch.</p>
+
+        <h2>Sample lesson plans</h2>
+        <p>The starter plan is a 45-minute lesson: bell ringer (5 min), partner work (10 min), direct instruction (20 min), exit ticket (5 min), and homework (5 min). Edit the names and times to fit your class.</p>
+        <p>For a 50-minute literacy block, try: read-aloud (10 min), mini-lesson (10 min), independent reading (20 min), turn and talk (5 min), and cleanup (5 min). For stations, add one activity per rotation with the same length, and the timer moves the class through each one.</p>
+
+        <h2>Lesson timer at a glance</h2>
+        <ul>
+          <li>Free to use with no account</li>
+          <li>Up to 20 activities, each from 1 to 180 minutes</li>
+          <li>Starts the next activity automatically, with an optional chime between activities</li>
+          <li>Named class plans are stored only in this browser</li>
+          <li>No site analytics script on this page</li>
+          <li>Open source under the <a href="/downloads/LICENSE.txt">MIT license</a>, with a <a href="/downloads/lesson-timer" download="lesson-timer.html">downloadable offline copy</a> and <a href="https://github.com/classmade-apps/apps/tree/main/lesson-timer">source code</a></li>
+        </ul>
+        <p>Need a single countdown instead? Use the <a href="/apps/classroom-timer/">classroom timer</a> for one activity, such as a transition or a reading block.</p>
+        <p class="small">Updated <time datetime="2026-11-19">November 19, 2026</time>. <a href="/requests/#request-form">Suggest a lesson timer improvement</a>.</p>
+      </section>
     </main>
     <footer class="footer">
       <div><strong>classmade</strong><p>Small classroom tools. Yours to make your own.</p></div>
-      <div><a href="/apps/">App library</a><a href="/requests/">Share an idea</a><a href="/privacy/">Privacy &amp; contact</a><p>Free to use · No account needed</p></div>
+      <div><a href="/apps/">App library</a><a href="/about/">About</a><a href="/requests/">Share an idea</a><a href="/privacy/">Privacy &amp; contact</a><p>Free to use · No account needed</p></div>
     </footer>
   </div>
   <script type="module" src="/lesson-timer.js"></script>

@@ -1,8 +1,25 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { LessonTimer, isLessonPlan, starterPlan } from '../src/lesson-timer-model.js';
+import { LessonTimer, isLessonPlan, restoreClassPlans, starterPlan } from '../src/lesson-timer-model.js';
 
 const minute = 60_000;
+
+test('existing single-plan data is preserved in the first class', () => {
+  const legacy = [{ name: 'Quiet reading', minutes: 12 }];
+  assert.deepEqual(restoreClassPlans(null, legacy), {
+    classes: [{ name: 'My class', activities: legacy }],
+    selected: 0,
+  });
+});
+
+test('saved classes retain separate activities and the last selected class', () => {
+  const classes = [
+    { name: 'Period 2', activities: [{ name: 'Warm-up', minutes: 4 }] },
+    { name: 'Period 4', activities: [{ name: 'Group work', minutes: 15 }] },
+  ];
+  assert.deepEqual(restoreClassPlans({ classes, selected: 1 }, starterPlan), { classes, selected: 1 });
+  assert.deepEqual(restoreClassPlans({ classes, selected: 7 }, starterPlan), { classes, selected: 0 });
+});
 
 test('one start advances through the 45-minute plan even when ticks are delayed', () => {
   const timer = new LessonTimer(starterPlan);

@@ -6,11 +6,12 @@ Plan a sequence of timed classroom activities and start them all with one click.
 
 ## Run a lesson
 
-1. Edit the activity names and durations. Use the arrows to reorder activities, or add and remove rows.
-2. Choose **Start lesson** to run the whole plan. Use **Fullscreen** for a projector and **Pause**, **Resume**, or **Skip activity** when plans change.
-3. Under **Activity transition sound**, choose a chime and select **Preview sound** to hear it. Sound starts off. **Reset lesson** returns you to editing.
+1. Use **New class** to create a named plan or choose a saved plan from **Class plan**.
+2. Edit the activity names and durations. Use the arrows to reorder activities, or add and remove rows.
+3. Choose **Start lesson** to run the whole plan. Use **Fullscreen** for a projector and **Pause**, **Resume**, or **Skip activity** when plans change.
+4. Under **Activity transition sound**, choose a chime and select **Preview sound** to hear it. Sound starts off. **Reset lesson** returns you to editing.
 
-The app saves the plan and chime setting in browser storage when available. Keep the tab open during a lesson.
+The app saves valid class plans and the chime setting in browser storage when available. Keep the tab open during a lesson.
 
 ## Change the source
 
