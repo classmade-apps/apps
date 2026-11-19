@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "node classroom-timer/build.mjs",
-    "test": "node --test classroom-timer/tests/*.test.mjs"
+    "build": "node classroom-timer/build.mjs && node lesson-timer/build.mjs",
+    "test": "node --test classroom-timer/tests/*.test.mjs lesson-timer/tests/*.test.mjs"
   },
   "engines": { "node": ">=22" }
 }

@@ -6,25 +6,26 @@ Classmade builds small, free tools around real classroom problems. A recurring b
 
 This repository holds the code for those tools. Teachers can use them as they are, change them for their classroom, or share their own versions. Each app has its own folder and instructions.
 
-Visit [Classmade.org](https://classmade.org) to browse the app library or [suggest a tool](https://classmade.org/requests/). You can also download and customize the timer from this repository.
+Visit [Classmade.org](https://classmade.org) to browse the app library or [suggest a tool](https://classmade.org/requests/). You can also download and customize the tools from this repository.
 
-## First app
+## Apps
 
 | App | What it does | Get started |
 | --- | --- | --- |
 | [Classroom timer](classroom-timer/) | A calm countdown for reading, group work, and transitions, with optional sound and fullscreen. | [Instructions and customization](classroom-timer/README.md) |
+| [Lesson Timer](lesson-timer/) | A sequence of timed activities with a projector view and optional transition chimes. | [Instructions and source](lesson-timer/README.md) |
 
 ## Use a tool without coding
 
 1. Open the app’s folder and follow its README.
 2. Download its `index.html` file using GitHub’s **Download raw file** button. Alternatively, select **Code → Download ZIP** on this repository and extract the ZIP.
-3. Open that HTML file in your browser. The classroom timer needs no account, installation, or internet connection once downloaded.
+3. Open that HTML file in your browser. The tools work offline once downloaded and need no account or installation.
 
 GitHub’s file view shows source code, not the running app. Download the file and open it locally to use it.
 
 ## Make it yours
 
-The timer includes its full source in one downloadable file, with clearly marked settings for the default activity, duration, presets, and color. For bigger changes, fork this repository or work with the separate source files in the app folder.
+Each app includes its full source in one downloadable file. The app README shows where to change its defaults. For bigger changes, fork this repository or work with the separate source files in the app folder.
 
 Developers can run the checks with Node.js 22 or newer; there are no package dependencies to install:
 

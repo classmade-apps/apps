@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson Timer for Classroom Activities | Classmade</title>
+  <meta name="description" content="Plan a sequence of timed classroom activities and start them all with one click. Project the current activity, countdown, and what comes next.">
+  <meta name="theme-color" content="#204d3d">
+  <meta property="og:title" content="Lesson Timer for Classroom Activities | Classmade">
+  <meta property="og:description" content="Start one timer for your whole lesson. Show students what to do now and what comes next.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/home.css">
+  <link rel="stylesheet" href="/lesson-timer.css">
+</head>
+<body class="home-page tools-page lesson-page">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="home-header">
+      <a class="brand" href="/" aria-label="Classmade home"><span class="home-mark" aria-hidden="true">✱</span>classmade</a>
+      <nav aria-label="Main navigation"><a href="/apps/" aria-current="page">App library</a><a href="/requests/">Request board</a><a href="/about/">About</a></nav>
+    </header>
+    <main id="main">
+      <div class="tool-heading">
+        <section class="page-intro">
+          <h1><span class="home-highlight">Lesson timer</span></h1>
+          <p>Plan your activities, then start once for the whole lesson.</p>
+        </section>
+      </div>
+
+      <noscript><p class="notice">Enable JavaScript to edit and run your lesson timer.</p></noscript>
+      <div class="lesson-workspace" id="lesson-workspace" hidden>
+        <section class="timer-shell lesson-stage" id="lesson-stage" aria-label="Classroom display">
+          <div class="lesson-stage-top">
+            <p id="lesson-position">Activity 1 of 5 · Ready</p>
+            <button type="button" class="secondary" id="lesson-fullscreen">Fullscreen</button>
+          </div>
+          <div class="lesson-current" id="lesson-current">
+            <h2 id="lesson-activity">Bell ringer</h2>
+            <div class="lesson-clock" id="lesson-clock" role="timer" aria-label="Time remaining" aria-live="off">05:00</div>
+            <progress class="lesson-progress" id="lesson-progress" max="1" value="1" aria-hidden="true"></progress>
+          </div>
+          <h2 class="lesson-complete" id="lesson-complete" hidden>Lesson complete</h2>
+          <div class="lesson-controls">
+            <button type="submit" form="lesson-plan" class="lesson-primary" id="lesson-start">Start lesson</button>
+            <button type="button" class="lesson-primary" id="lesson-pause" hidden>Pause</button>
+            <button type="button" class="secondary" id="lesson-skip" hidden>Skip activity</button>
+            <button type="button" class="secondary" id="lesson-reset" hidden>Reset lesson</button>
+          </div>
+          <div class="lesson-next" id="lesson-next">
+            <span>Up next</span>
+            <strong id="lesson-next-name">Partner work</strong>
+            <span id="lesson-next-time">10 min</span>
+          </div>
+          <p class="lesson-sr" id="lesson-status" role="status"></p>
+        </section>
+
+        <form id="lesson-plan" class="lesson-plan" aria-labelledby="lesson-plan-title" novalidate>
+          <div class="lesson-plan-heading">
+            <h2 id="lesson-plan-title">Lesson plan</h2>
+            <span id="lesson-total">45 min total</span>
+          </div>
+          <p class="small" id="lesson-plan-hint">Valid plans save in this browser.</p>
+          <div class="lesson-validation" id="lesson-validation" hidden>
+            <span class="lesson-warning-icon" aria-hidden="true">!</span>
+            <div>
+              <strong id="lesson-validation-title"></strong>
+              <p>Fix the highlighted fields to start the lesson.</p>
+            </div>
+          </div>
+          <fieldset id="lesson-fields">
+            <legend class="lesson-sr">Timed activities</legend>
+            <ol class="lesson-activities" id="lesson-activities"></ol>
+            <button type="button" class="secondary" id="lesson-add">+ Add activity</button>
+          </fieldset>
+          <p class="small" id="lesson-plan-status" role="status"></p>
+          <div class="lesson-sound">
+            <label for="lesson-sound-tone">Activity transition sound</label>
+            <div class="lesson-sound-controls">
+              <div class="lesson-sound-select">
+                <select id="lesson-sound-tone">
+                  <option value="off">Off</option>
+                  <option value="gentle">Gentle chime</option>
+                  <option value="bright">Bright chime</option>
+                </select>
+              </div>
+              <button type="button" class="secondary" id="lesson-sound-preview" disabled>Preview sound</button>
+            </div>
+            <p class="small" id="lesson-sound-status" role="status"></p>
+          </div>
+        </form>
+
+        <template id="lesson-row">
+          <li class="lesson-row">
+            <div class="lesson-row-inputs">
+              <span class="lesson-step" aria-hidden="true"></span>
+              <input type="text" maxlength="70" required placeholder="Activity name" data-field="name">
+              <label class="lesson-duration">
+                <span class="lesson-sr"></span>
+                <input type="number" inputmode="numeric" min="1" max="180" step="1" required data-field="minutes">
+                <span aria-hidden="true">min</span>
+              </label>
+            </div>
+            <div class="lesson-row-actions">
+              <button type="button" class="secondary" data-action="up"><span aria-hidden="true">↑</span></button>
+              <button type="button" class="secondary" data-action="down"><span aria-hidden="true">↓</span></button>
+              <button type="button" class="secondary" data-action="remove"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="lesson-row-errors" hidden>
+              <p data-error="name"></p>
+              <p data-error="minutes"></p>
+            </div>
+          </li>
+        </template>
+      </div>
+      <dialog class="lesson-presentation" id="lesson-presentation" aria-label="Lesson presentation"></dialog>
+    </main>
+    <footer class="footer">
+      <div><strong>classmade</strong><p>Small classroom tools. Yours to make your own.</p></div>
+      <div><a href="/apps/">App library</a><a href="/requests/">Share an idea</a><a href="/privacy/">Privacy &amp; contact</a><p>Free to use · No account needed</p></div>
+    </footer>
+  </div>
+  <script type="module" src="/lesson-timer.js"></script>
+</body>
+</html>

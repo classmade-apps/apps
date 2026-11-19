@@ -1,0 +1,1455 @@
+<!doctype html>
+<!-- MIT License
+
+Copyright (c) 2026 Classmade contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ -->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lesson Timer for Classroom Activities | Classmade</title>
+  <meta name="description" content="Plan a sequence of timed classroom activities and start them all with one click. Project the current activity, countdown, and what comes next.">
+  <meta name="theme-color" content="#204d3d">
+  <meta property="og:title" content="Lesson Timer for Classroom Activities | Classmade">
+  <meta property="og:description" content="Start one timer for your whole lesson. Show students what to do now and what comes next.">
+  <meta property="og:type" content="website">
+  <style>
+:root{--ink:#203d32;--green:#204d3d;--paper:#fafbf7;--line:#dbe2d8;--muted:#52685d;--lilac:#ddd1f2;--lime:#e6f2b8;--white:#fff;--orange:#f6dfb9;font-family:Avenir,'Avenir Next','Segoe UI',sans-serif;color:var(--ink);background:var(--paper);font-synthesis:none}*{box-sizing:border-box}body{margin:0}a{color:inherit;text-underline-offset:4px}button,input,textarea,select{font:inherit}button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}:focus-visible{outline:3px solid #8057ba;outline-offset:4px}button{cursor:pointer}button:disabled{cursor:default;opacity:.55}a.button{text-decoration:none}button,.button{min-height:46px;border-radius:9px;padding:11px 19px;border:1px solid var(--green);background:var(--green);color:white;font-weight:650;display:inline-flex;justify-content:center;align-items:center;gap:9px}button:hover,.button:hover{filter:brightness(.94)}button.secondary,.button.secondary{background:transparent;color:var(--green);border-color:#a8baae}button.quiet{background:white;color:var(--green);border-color:var(--line)}.skip{position:absolute;left:16px;top:-100px;z-index:10;background:white;padding:12px}.skip:focus{top:10px}.wrap{max-width:1160px;padding:0 36px;margin:auto}header{height:100px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{font-size:23px;font-weight:800;letter-spacing:-1px;display:flex;align-items:center;gap:10px;text-decoration:none}.brand img{width:35px;height:35px}nav{display:flex;align-items:center;gap:32px;font-size:15px;font-weight:600}nav a{text-decoration:none}nav a[aria-current=page]{text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:9px}.hero{display:grid;grid-template-columns:1.12fr 1fr;gap:68px;padding:65px 0 76px;align-items:center}.pill{display:inline-block;border:1px solid var(--line);border-radius:30px;padding:6px 12px;font-size:13px;background:white}.hero h1{font-size:clamp(42px,5.2vw,64px);line-height:1.08;letter-spacing:-2.8px;margin:23px 0}.hero p{font-size:18px;line-height:1.7;max-width:450px;color:var(--muted)}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0 18px}.small{font-size:13px;line-height:1.6;color:var(--muted)}.hero-art{position:relative;padding:25px 18px 32px 6px}.timer-paper{background:var(--lilac);border-radius:18px;padding:28px 32px 36px;transform:rotate(-3deg);box-shadow:8px 9px 0 #c7d6b5;color:#332b48}.timer-paper .art-top{display:flex;justify-content:space-between;font-weight:650;font-size:14px}.clock-art{margin:30px auto 26px;border:14px solid #bba2dc;border-right-color:#eee5f8;width:220px;height:220px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:48px;font-weight:700;letter-spacing:-2px;font-variant-numeric:tabular-nums}.art-foot{display:flex;justify-content:center;gap:10px}.art-foot span{padding:8px 22px;background:#f1eafa;border-radius:7px;font-size:13px}.note{position:absolute;right:-6px;bottom:0;background:var(--lime);border:1px solid #cfdda4;border-radius:4px;padding:16px 22px;transform:rotate(4deg);font-size:15px;box-shadow:0 4px 12px #203d320a}.note strong{display:block;margin-bottom:4px}.section{padding:62px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:28px}h2{font-size:32px;line-height:1.2;letter-spacing:-1px;margin:0 0 12px}h3{font-size:21px;letter-spacing:-.4px;margin:0 0 12px}p{line-height:1.65}p.sub{color:var(--muted);margin:0;max-width:630px}.divider{border-top:1px solid var(--line)}.tool-feature{display:grid;grid-template-columns:1fr 1fr;background:#edf1e8;border:1px solid var(--line);border-radius:14px;overflow:hidden}.tool-picture{padding:38px;display:flex;align-items:center;justify-content:center;background:#e0e8d8;min-height:250px}.tiny-timer{background:#fff;border-radius:13px;width:260px;padding:24px;text-align:center;box-shadow:0 8px 22px #203d320a}.tiny-timer b{display:block;font-size:50px;letter-spacing:-2px;margin:10px 0}.tiny-timer span{font-size:13px;color:var(--muted)}.tiny-bar{height:7px;border-radius:10px;background:var(--lilac);margin:12px 0}.tool-info{padding:37px 42px}.tool-info h3{font-size:28px;margin-top:14px}.tag{display:inline-block;font-size:12px;font-weight:650;border-radius:5px;background:white;padding:5px 9px}.how{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:35px}.step-num{width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:var(--lime);border-radius:50%;margin-bottom:20px;font-weight:700}.how p{color:var(--muted);font-size:15px}.invitation{padding:42px;border-radius:14px;background:var(--lilac);display:flex;align-items:center;justify-content:space-between;gap:30px;margin:0 0 64px}.invitation p{margin:0;max-width:570px}.footer{border-top:1px solid var(--line);padding:30px 0 35px;display:flex;justify-content:space-between;gap:25px;font-size:13px;color:var(--muted)}.footer p{margin:4px 0}.footer a{margin-left:20px}.page-intro{padding:52px 0 30px}.page-intro h1{font-size:46px;letter-spacing:-1.8px;margin:0 0 15px;line-height:1.15}.page-intro p{max-width:680px;color:var(--muted);font-size:17px}.notice{padding:15px 19px;border:1px solid #ccdab2;background:#f0f5e5;border-radius:9px;font-size:14px;line-height:1.65;margin:20px 0 28px}.board-layout{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:32px;padding-bottom:60px}.filters{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0}.filters button{font-size:13px;min-height:36px;padding:7px 12px;background:white;color:var(--green);border:1px solid var(--line)}.filters button[aria-pressed=true]{background:var(--green);color:white}.request{padding:24px 0;border-bottom:1px solid var(--line);display:flex;gap:20px;align-items:start}.vote{flex:0 0 53px;padding:8px 5px;min-height:67px;background:white;color:var(--green);border:1px solid var(--line);flex-direction:column;gap:3px}.vote[aria-pressed=true]{background:var(--lime);border-color:#98ab6f}.request h3{font-size:18px;margin:10px 0 7px}.request p{font-size:14px;color:var(--muted);margin:0 0 12px;white-space:pre-wrap;overflow-wrap:anywhere}.request-body{min-width:0;flex:1}.status{font-size:12px;padding:5px 8px;border-radius:5px;background:#e9edf1;display:inline-block}.status.planned{background:var(--lilac)}.status.in-progress{background:var(--orange)}.status.completed{background:var(--lime)}.status.not-planned{background:#ede5e1}.sample{font-size:11px;color:var(--muted);margin-left:8px}.text-button{background:transparent;color:var(--green);border:0;padding:0;min-height:32px;text-decoration:underline;font-size:13px}.form-panel{background:white;border:1px solid var(--line);border-radius:12px;padding:23px;height:fit-content;margin-top:20px}.form-panel p{font-size:14px;color:var(--muted)}label{display:block;font-size:14px;font-weight:650;margin:18px 0 7px}input,textarea,select{width:100%;padding:12px;border:1px solid #a9b8ae;border-radius:7px;background:white;color:var(--ink)}textarea{resize:vertical;min-height:110px}form button[type=submit]{margin-top:18px;width:100%}.message{font-size:14px;color:var(--green);line-height:1.5}.feedback{margin:16px 0 0;padding:18px;background:#edf1e8;border-radius:8px}.feedback h4{margin:0 0 12px}.feedback ul{padding-left:18px}.feedback li{font-size:14px;line-height:1.6;margin:10px 0;overflow-wrap:anywhere;white-space:pre-wrap}.feedback textarea{min-height:80px}.search-box{max-width:580px;margin:0 0 30px}.empty{padding:35px 15px;color:var(--muted);border:1px dashed var(--line);border-radius:9px}.crumb{font-size:14px;padding-top:25px;color:var(--muted)}.tool-heading{display:flex;align-items:center;justify-content:space-between;gap:30px}.tool-heading .page-intro{padding:35px 0 20px}.timer-shell{background:#e5eddf;border:1px solid #d6e0ce;padding:34px;border-radius:16px;text-align:center;max-width:900px;margin:0 auto 50px}.timer-shell:fullscreen{max-width:none;width:100%;height:100%;border-radius:0;display:flex;flex-direction:column;justify-content:center;overflow:auto}.timer-label{max-width:400px;margin:auto}.timer-label input{text-align:center;background:transparent;border:0;font-weight:650;font-size:18px}.time-display{font-size:clamp(70px,12vw,124px);font-weight:650;line-height:1.3;letter-spacing:-5px;font-variant-numeric:tabular-nums;margin:10px 0}.time-display.done{color:#78451c}.progress{height:9px;background:#cad7c3;border-radius:9px;max-width:570px;margin:0 auto 24px;overflow:hidden}.progress span{display:block;height:100%;background:var(--green);width:100%;transition:width .2s}.presets{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}.presets button{background:transparent;border-color:#a9bba1;color:var(--green);min-height:38px;padding:7px 14px;font-size:14px}.timer-actions{justify-content:center}.custom-time{display:flex;justify-content:center;align-items:end;gap:10px;margin-top:20px}.custom-time label{margin:0;text-align:left;font-size:12px}.custom-time input{width:95px;margin-top:6px}.custom-time button{background:white;color:var(--green);border-color:#a9bba1}.sound-label{display:flex;justify-content:center;align-items:center;gap:8px;font-weight:400;font-size:13px}.sound-label input{width:17px;height:17px}.tool-details{max-width:850px;margin:auto;padding-bottom:55px}.tool-details h2{font-size:25px;margin-top:30px}.tool-details li{line-height:1.8;margin:8px 0;color:var(--muted)}.hidden,[hidden]{display:none!important}.library-list{padding-bottom:65px}.count{color:var(--muted);font-size:13px;margin:15px 0}dialog{width:min(480px,90vw);border:1px solid var(--line);border-radius:15px;padding:30px;color:var(--ink)}dialog::backdrop{background:#203d3270}@media(max-width:800px){.wrap{padding:0 23px}header{height:85px}nav{gap:20px}.hero{gap:25px;padding:35px 0 55px}.hero h1{font-size:46px;letter-spacing:-2px}.hero-art{padding:15px 10px}.timer-paper{padding:25px 20px}.clock-art{width:180px;height:180px;font-size:42px}.board-layout{grid-template-columns:1fr}.form-panel{grid-row:1}.how{gap:24px}.tool-info{padding:26px}.tool-picture{padding:24px}.note{right:0;padding:13px;font-size:13px}}@media(max-width:600px){.brand{font-size:20px}.brand img{width:30px;height:30px}header{gap:12px;flex-wrap:wrap;height:auto;padding:20px 0}nav{gap:18px;font-size:13px}nav .nav-about{display:none}.hero{grid-template-columns:1fr;padding-top:24px;gap:25px}.hero h1{font-size:49px;max-width:420px}.hero p{font-size:17px}.hero-art{max-width:360px;width:100%;margin:0 auto}.clock-art{width:180px;height:180px}.timer-paper{padding:22px}.section{padding:40px 0}.section-head{align-items:start;flex-direction:column;gap:8px}h2{font-size:28px}.tool-feature{grid-template-columns:1fr}.tool-picture{min-height:210px}.tool-info{padding:28px}.how{grid-template-columns:1fr;gap:18px}.step-num{float:left;margin-right:15px;margin-bottom:0}.how h3{padding-top:4px}.how p{margin-left:49px}.invitation{padding:28px;display:block;margin-bottom:40px}.invitation .button{margin-top:22px}.footer{flex-direction:column}.footer a{margin:0 20px 0 0}.page-intro{padding-top:30px}.page-intro h1{font-size:38px}.tool-heading{display:block}.tool-heading>.button{margin-bottom:22px}.timer-shell{padding:22px 15px}.request{gap:13px}.custom-time{gap:7px}.custom-time input{width:80px}.time-display{letter-spacing:-3px}.notice{font-size:13px}.form-panel{padding:20px}.timer-actions button{min-width:110px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+
+.own-tool{max-width:900px;margin:0 auto 45px;background:#edf1e8}.own-tool .actions{margin-bottom:0}.own-tool p.small{margin-top:12px}.code-sample{padding:22px;background:#edf1e8;border-radius:10px;overflow-x:auto;line-height:1.7;font-size:14px}blockquote{border-left:4px solid #bba2dc;margin:20px 0;padding:8px 20px;line-height:1.8}
+
+fieldset{border:1px solid var(--line);border-radius:9px;padding:14px;margin:22px 0}legend{font-weight:650;font-size:14px;padding:0 6px}.check-label{display:flex;align-items:flex-start;gap:9px;line-height:1.5;font-weight:400}.check-label input{width:18px;height:18px;flex-shrink:0;margin-top:3px}.honeypot{position:absolute;left:-10000px}.admin-card{padding:26px;background:white;border:1px solid var(--line);border-radius:12px;margin:22px 0;overflow-wrap:anywhere}.admin-card>p{white-space:pre-wrap}.private-contact{background:#f0edf6;padding:20px;border-radius:8px;margin-top:25px}.private-contact button{margin:10px}.admin-card form{max-width:650px}#dashboard>h2{margin-top:40px}#app-form{max-width:700px;margin-bottom:60px}
+
+.scope-examples p{margin-left:0}.scope-examples h3{padding-top:0}
+
+nav.crumb{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-start}
+.timer-example{margin:24px 0}
+.timer-example img{display:block;max-width:100%;height:auto;border:1px solid var(--line);border-radius:12px}
+.timer-example figcaption{margin-top:8px;color:var(--muted);font-size:14px}
+@media(max-width:600px){
+  .tool-feature{grid-template-columns:minmax(0,1fr)}
+  .tiny-timer{max-width:100%;min-width:0;padding:clamp(12px,5vw,24px)}
+}
+.privacy-layout{align-items:start;padding-bottom:32px}
+.privacy-layout .tool-details{padding-bottom:0}
+.privacy-layout .tool-details h2:first-child{margin-top:0}
+.footer p a{margin-left:0}
+.catalog-card{grid-template-columns:minmax(0,1fr);margin-bottom:20px}
+.analytics-settings{align-self:flex-start;background:transparent;color:inherit;text-decoration:underline;text-underline-offset:3px;padding:4px 0;min-height:32px}
+.analytics-settings:hover{background:transparent;color:var(--green)}
+.analytics-choice{position:fixed;z-index:5;bottom:16px;right:16px;width:min(420px,calc(100% - 32px));padding:18px;background:var(--white);border:1px solid var(--line);border-radius:12px;box-shadow:0 8px 30px #203d3226;color:var(--ink)}
+.analytics-choice h2{font-size:20px;margin:0}
+.analytics-choice p{font-size:14px;margin:8px 0 12px}
+.analytics-choice .actions{margin:0;gap:8px}
+.analytics-choice button{font-size:13px;padding:8px 12px;min-height:36px}
+
+.sound-label, .text-button { min-height: 44px; }
+.analytics-choice {
+  position: static;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  width: auto;
+  max-width: 1152px;
+  margin: 0 auto 12px;
+  padding: 9px 16px;
+  box-shadow: none;
+}
+.analytics-choice p { margin: 0; }
+
+.timer-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 12px;
+  flex-wrap: wrap;
+}
+.timer-options label { margin: 0; }
+.timer-options select { width: auto; }
+.timer-options button { min-height: 44px; }
+.timer-visual-mode .progress { height: clamp(24px, 5vw, 60px); }
+.timer-shell button[data-minutes] { min-height: 44px; }
+.timer-shell button[data-minutes][aria-pressed="true"] { background: #e8f3bb; color: #0c241a; }
+
+.footer > div:last-of-type {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  row-gap: 6px;
+  align-content: flex-start;
+}
+
+.footer > div:last-of-type > a {
+  margin: 0;
+}
+
+.footer > div:last-of-type > p {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+.home-page {
+  --home-paper: #fff8eb;
+  --home-ink: #0c241a;
+  --home-green: #093527;
+  --home-lime: #cbfa32;
+  --home-coral: #ff7264;
+  --home-plum: #471133;
+  --home-lilac: #d9baff;
+  --home-dots: radial-gradient(circle, #c3a993aa 1px, transparent 1.2px);
+  background: var(--home-paper);
+  color: var(--home-ink);
+  font-family: system-ui, sans-serif;
+}
+
+.home-wrap {
+  width: min(1320px, calc(100% - 2 * clamp(22px, 4.5vw, 64px)));
+  margin-inline: auto;
+}
+.home-header { height: auto; min-height: 90px; padding-block: 16px; }
+.home-header .brand { font-size: clamp(1.85rem, 4vw, 3rem); font-weight: 900; letter-spacing: -.075em; }
+.home-mark { color: var(--home-plum); font-size: 1.22em; line-height: 1; }
+.home-header nav, .home-footer nav { flex-wrap: wrap; gap: 12px clamp(16px, 3vw, 34px); }
+.home-header nav a:hover, .home-footer nav a:hover { text-decoration: underline; }
+.home-nav-cta { border-bottom: 2px solid var(--home-plum); padding-block: 3px; }
+
+.home-hero {
+  background-image: var(--home-dots);
+  background-size: 21px 21px;
+}
+.home-hero-grid, .home-feature, .home-ideas-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.21fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(33px, 6vw, 85px);
+}
+.home-hero-grid { padding-block: clamp(49px, 6.8vw, 102px) clamp(56px, 7vw, 105px); }
+.home-intro { position: relative; }
+.home-intro h1 {
+  margin: 0;
+  font-size: clamp(2.75rem, 6.65vw, 6.45rem);
+  font-weight: 900;
+  line-height: .99;
+  letter-spacing: -.063em;
+}
+.home-headline-line { display: block; }
+.home-highlight {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+  margin-bottom: .12em;
+}
+.home-highlight::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: auto -.2em -.02em -.12em;
+  height: .29em;
+  background: var(--home-lime);
+  transform: rotate(-4deg);
+  clip-path: polygon(2% 18%, 32% 6%, 98% 0, 96% 22%, 100% 42%, 95% 55%, 97% 76%, 69% 91%, 9% 99%, 12% 82%, 0 86%, 4% 61%, 0 55%, 7% 32%);
+}
+.home-doodle {
+  position: absolute;
+  top: -.21em;
+  right: 10%;
+  color: var(--home-plum);
+  font-size: clamp(2.5rem, 5.6vw, 5rem);
+  line-height: 1;
+  transform: rotate(14deg);
+  pointer-events: none;
+}
+.home-intro > p:not(.home-assurance), .home-feature-copy > p, .home-ideas-grid > div:first-child p {
+  max-width: 46ch;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  line-height: 1.48;
+}
+.home-intro > p:not(.home-assurance) { margin: 22px 0 25px; }
+.home-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 15px; }
+.home-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .65em;
+  min-height: 50px;
+  padding: 11px 17px;
+  border: 2px solid var(--home-plum);
+  border-radius: 10px;
+  box-shadow: 4px 5px 0 var(--home-plum);
+  font-weight: 800;
+  line-height: 1.3;
+  text-decoration: none;
+}
+.home-button-primary { background: var(--home-lime); color: var(--home-ink); }
+.home-button-outline { background: var(--home-coral); color: var(--home-ink); }
+.home-button:hover { translate: -1px -1px; box-shadow: 5px 6px 0 var(--home-plum); }
+.home-button:active { translate: 3px 4px; box-shadow: 1px 1px 0 var(--home-plum); }
+.home-assurance { margin: 23px 0 0; font-size: .86rem; font-weight: 650; }
+.home-assurance span { padding-inline: .18em; }
+
+.home-demo-stack { position: relative; isolation: isolate; margin: 16px 13px 12px 7px; }
+.home-demo-stack::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -16px -12px -17px -13px;
+  transform: rotate(6deg);
+  background: #ffadd6;
+}
+.home-demo {
+  position: relative;
+  background: var(--home-green);
+  color: var(--home-paper);
+  border: 2px solid #0d3023;
+  border-radius: 24px;
+  padding: clamp(20px, 3.2vw, 38px);
+  box-shadow: 9px 10px 0 var(--home-plum);
+}
+.demo-paperclip {
+  position: absolute;
+  top: -27px;
+  right: 27px;
+  width: 25px;
+  height: 64px;
+  border: 4px solid var(--home-plum);
+  border-radius: 20px;
+  transform: rotate(31deg);
+  pointer-events: none;
+}
+.demo-paperclip::before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  bottom: 9px;
+  border-left: 4px solid var(--home-plum);
+  border-radius: 4px;
+}
+.demo-top { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 7px; margin-bottom: 15px; }
+.demo-top h2 { font-size: clamp(1.24rem, 2.25vw, 1.95rem); font-weight: 850; letter-spacing: -.035em; margin: 0; }
+.demo-badge { font-size: .75rem; color: var(--home-lime); border: 1px solid #8ca68b; border-radius: 100px; padding: 4px 9px; }
+.demo-board { display: grid; justify-items: center; gap: 13px; padding: 8px 0; }
+.demo-activity { color: #e3ede1; font-size: .93rem; }
+.demo-time {
+  color: var(--home-lime);
+  font-size: clamp(3.5rem, 8vw, 8.2rem);
+  font-weight: 900;
+  letter-spacing: -.08em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  padding-right: .08em;
+}
+.demo-track { margin: 3px 0; width: min(88%, 330px); background: #536c51; border-radius: 12px; overflow: hidden; }
+#demo-progress { height: 5px; width: 100%; background: var(--home-lime); transition: width .25s linear; }
+.demo-controls { display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; }
+.demo-controls button { min-height: 44px; padding: 7px 17px; font-weight: 800; border-radius: 100px; background: var(--home-lime); color: var(--home-ink); border: 1px solid var(--home-lime); }
+.demo-controls #demo-reset { background: transparent; color: var(--home-paper); border-color: #a1bda9; }
+.demo-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 13px; min-height: 30px; font-size: .9rem; }
+.home-demo :focus-visible { outline-color: #ffadd6; }
+
+.home-feature-band { background: var(--home-lilac); border-block: 2px solid var(--home-plum); }
+.home-feature, .home-ideas-grid { padding-block: clamp(45px, 6vw, 82px); }
+.home-feature h2, .home-ideas h2 { font-size: clamp(2rem, 4.1vw, 3.8rem); font-weight: 900; letter-spacing: -.055em; line-height: 1.04; }
+.home-text-link { font-weight: 750; }
+.home-details { margin: 0; }
+.home-details div { padding: 15px 0; border-block-start: 1px solid #8e639e; }
+.home-details div:last-child { border-block-end: 1px solid #8e639e; }
+.home-details dt { font-weight: 800; }
+.home-details dd { margin: 5px 0 0; line-height: 1.5; }
+.home-ideas { scroll-margin-top: 18px; }
+.home-example { background: #ffd9e9; border: 2px solid var(--home-plum); border-radius: 12px; padding: clamp(20px, 3vw, 32px); box-shadow: 5px 5px 0 var(--home-plum); }
+.home-example h3 { margin: 0; font-size: .95rem; }
+.home-example p { font-size: clamp(1.13rem, 2.3vw, 1.6rem); line-height: 1.45; margin: 10px 0; }
+.home-example .home-example-note { font-size: .9rem; margin-bottom: 0; }
+.home-footer { display: flex; justify-content: space-between; align-items: center; gap: 18px; flex-wrap: wrap; padding-block: 28px; border-top: 1px solid #b49d8c; }
+.home-footer p { font-size: .9rem; margin: 8px 0 0; }
+.home-sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .home-hero-grid, .home-feature, .home-ideas-grid { grid-template-columns: 1fr; }
+  .home-intro h1 { font-size: clamp(2.68rem, 10.4vw, 5.5rem); }
+  .home-demo-stack { width: min(calc(100% - 20px), 480px); }
+  .demo-time { font-size: clamp(4rem, 16vw, 7rem); }
+  .home-header nav { font-size: .85rem; }
+}
+@media (max-width: 520px) {
+  .home-header { flex-wrap: wrap; }
+  .home-header nav { width: 100%; gap: 9px 15px; }
+  .home-nav-cta { padding-block: 3px; }
+  .home-doodle { right: 17%; }
+}
+@media (prefers-reduced-motion: reduce) { #demo-progress { transition: none; } }
+
+.about-hero {
+  border-block: 1px solid #ddcbb6;
+}
+.about-copy {
+  max-width: 760px;
+}
+.about-copy .page-intro {
+  padding-block: clamp(46px, 8vw, 80px);
+}
+.about-copy .page-intro h1 {
+  margin-top: 0;
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  letter-spacing: -.062em;
+  line-height: 1.04;
+}
+.about-copy .page-intro p {
+  font-size: clamp(1.1rem, 2.1vw, 1.32rem);
+}
+.about-body {
+  padding-block: 44px 60px;
+}
+.about-copy section + section {
+  margin-top: 38px;
+}
+.about-copy .home-actions {
+  margin-top: 24px;
+}
+
+.home-project { padding-block: 12px 20px; }
+.home-project p { margin: 0; }
+.demo-controls { visibility: hidden; min-height: 44px; }
+.demo-controls-ready { visibility: visible; }
+.demo-link { min-height: 44px; }
+.tools-page .timer-shell { background: #093527; color: #fff8eb; border: 2px solid #471133; box-shadow: 6px 7px 0 #471133; }
+.tools-page .timer-shell .small,
+.tools-page .timer-shell .message,
+.tools-page .timer-label input { color: #fff8eb; }
+.tools-page .timer-shell button { min-height: 44px; }
+.tools-page .timer-shell :focus-visible { outline-color: #ffadd6; }
+.tools-page .timer-shell #start-pause { color: #0c241a; background: #cbfa32; border-color: #cbfa32; }
+.tools-page .timer-shell #reset,
+.tools-page .timer-shell .presets button { color: #fff8eb; }
+.tools-page .timer-shell .presets button[aria-pressed="true"] { background: #cbfa32; color: #0c241a; }
+.tools-page .timer-shell #time-display { margin-block: 6px; color: #cbfa32; }
+.tools-page .timer-shell #time-display.done { color: #ffadd6; }
+.tools-page .timer-shell .progress { margin-bottom: 12px; }
+.tools-page .timer-shell .progress span { background: #cbfa32; }
+.tools-page .timer-shell .timer-actions { margin: 8px 0 15px; }
+.tools-page .tool-heading .page-intro { padding-block: 20px 10px; }
+.tools-page .tool-heading .page-intro p { margin: 0 0 12px; }
+.tools-page .tool-heading #fullscreen { margin-bottom: 12px; }
+.tools-page .library-guide { max-width: 68ch; margin-bottom: 46px; }
+.tools-page .tool-feature { background: #f0ddff; }
+.tools-page .tool-picture { background: #d9baff; }
+.tools-page .invitation { background: #f0ddff; }
+.timer-figure { margin: 24px 0; }
+.timer-figure img { max-width: 100%; height: auto; display: block; border-radius: 10px; }
+.timer-figure figcaption { font-size: .9rem; margin-top: 8px; }
+.timer-guide details { border-bottom: 1px solid #bfa994; }
+.timer-guide summary { cursor: pointer; padding-block: 13px; min-height: 44px; font-weight: 650; }
+.timer-guide details p { margin: 0 0 16px; }
+@media (max-width: 520px) {
+  .home-header { flex-wrap: nowrap; gap: 10px; }
+  .home-header .brand { font-size: 1.45rem; flex-shrink: 0; }
+  .home-header nav { width: auto; flex-wrap: nowrap; gap: 9px; }
+  .home-header nav a { display: inline-flex; align-items: center; min-height: 44px; white-space: nowrap; font-size: .75rem; }
+  .home-header nav .home-nav-cta { display: none; }
+  .tools-page .wrap { padding-inline: 17px; }
+  .tools-page .timer-shell { padding-block: 13px; }
+}
+@media (max-width: 355px) {
+  .home-header { flex-wrap: wrap; }
+}
+
+.tools-page .page-intro h1 {
+  color: var(--home-ink);
+  font-weight: 900;
+  letter-spacing: -.055em;
+  line-height: 1.08;
+}
+.tools-page .page-intro .home-highlight {
+  margin-bottom: 0;
+}
+.tools-page .page-intro .home-highlight::after {
+  inset-inline: -.07em;
+}
+.tools-page .tool-feature {
+  border: 2px solid var(--home-plum);
+  box-shadow: 5px 6px 0 var(--home-plum);
+}
+.tools-page .tool-picture {
+  background-color: var(--home-lilac);
+  background-image: var(--home-dots);
+  background-size: 21px 21px;
+}
+.tools-page .tiny-timer {
+  background: var(--home-green);
+  color: var(--home-lime);
+  border: 2px solid var(--home-plum);
+  box-shadow: 4px 5px 0 var(--home-plum);
+}
+.tools-page .tiny-timer span {
+  color: var(--home-paper);
+}
+.tools-page .tiny-bar {
+  background: var(--home-lime);
+}
+.tools-page .tool-info .button:not(.secondary),
+.tools-page .invitation .button:not(.secondary) {
+  background: var(--home-lime);
+  color: var(--home-ink);
+  border-color: var(--home-plum);
+  box-shadow: 3px 4px 0 var(--home-plum);
+}
+@media (min-width: 701px) {
+  .tools-page .catalog-card-with-picture {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+}
+
+/* Shared treatment for request, contact, admin, and error pages. */
+.highlighter-content .page-intro {
+  position: relative;
+  border-bottom: 2px solid var(--home-plum);
+  background-image: linear-gradient(to right, var(--home-paper), transparent 75%), var(--home-dots);
+  background-size: 100% 100%, 21px 21px;
+  margin-bottom: 24px;
+}
+.highlighter-content .page-intro p {
+  max-width: 62ch;
+}
+.highlighter-content .notice {
+  background: var(--home-lilac);
+  border: 2px solid var(--home-plum);
+}
+.highlighter-content :is(.form-panel, .admin-card) {
+  background: #fffdf8;
+  border: 2px solid var(--home-plum);
+  box-shadow: 4px 5px 0 var(--home-plum);
+}
+.highlighter-content :is(.form-panel, .admin-card) :is(button[type="submit"], #passkey-sign-in) {
+  background: var(--home-lime);
+  color: var(--home-ink);
+  border: 2px solid var(--home-plum);
+}
+.highlighter-content .filters button[aria-pressed="true"],
+.highlighter-content .vote[aria-pressed="true"] {
+  background: var(--home-lime);
+  color: var(--home-ink);
+  border-color: var(--home-plum);
+}
+.highlighter-content .footer {
+  border-color: var(--home-plum);
+}
+.highlighter-content #admin-login summary {
+  cursor: pointer;
+  padding-block: 12px;
+}
+
+.request-page :is(#request-form, #community-ideas) {
+  scroll-margin-top: 24px;
+}
+
+.highlighter-content .idea-form {
+  padding: clamp(20px, 4vw, 38px);
+  margin-block: 0 48px;
+}
+
+.idea-form-heading {
+  border-bottom: 1px solid #dcc9d9;
+  padding-bottom: 12px;
+}
+
+.idea-form-heading h2 {
+  color: var(--home-ink);
+  font-weight: 850;
+  margin-bottom: 4px;
+}
+
+.idea-form-heading p {
+  margin: 0;
+}
+
+.idea-form-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 20px clamp(22px, 4vw, 48px);
+  padding-top: 18px;
+}
+
+.idea-fields label:first-child {
+  margin-top: 0;
+}
+
+.idea-fields textarea {
+  min-height: 110px;
+}
+
+.idea-options {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.idea-option {
+  border: 1px solid var(--home-plum);
+  border-radius: 8px;
+  background: #f9efff;
+}
+
+.idea-option summary {
+  cursor: pointer;
+  padding: 12px 14px;
+  font-weight: 750;
+}
+
+.idea-option summary .small {
+  font-weight: 500;
+}
+
+.idea-option-body {
+  padding: 0 14px 14px;
+}
+
+.idea-option-body > :first-child {
+  margin-top: 0;
+}
+
+.idea-option-body textarea {
+  min-height: 68px;
+}
+
+.idea-form-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+}
+
+.idea-form-actions button[type="submit"] {
+  width: auto;
+  min-height: 44px;
+  margin: 8px 0 0;
+  box-shadow: 3px 4px 0 var(--home-plum);
+}
+
+.idea-form-actions .message {
+  margin: 0;
+}
+
+.idea-form-actions .message:empty {
+  flex-basis: 0;
+}
+
+.community-ideas {
+  padding-bottom: 54px;
+}
+
+@media (max-width: 700px) {
+  .idea-form-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .idea-form-actions button[type="submit"] {
+    margin-top: 16px;
+  }
+}
+
+.design-preferences dt {
+  font-weight: 700;
+}
+
+.design-preferences dd {
+  margin: 4px 0 14px;
+  white-space: pre-wrap;
+}
+
+.contact-verification {
+  margin-top: 18px;
+}
+
+.contact-verification #contact-challenge {
+  min-height: 66px;
+}
+
+.contact-verification #contact-challenge-status {
+  margin-block: 8px;
+}
+
+.lesson-page { min-height: 100vh; }
+.lesson-page .tool-heading .page-intro { padding-block: 14px 12px; }
+.lesson-page .page-intro h1 { margin-bottom: 8px; }
+.lesson-page .tool-heading .page-intro p { margin-bottom: 8px; }
+
+.lesson-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 26px;
+  margin-bottom: 32px;
+}
+
+.lesson-page .lesson-stage {
+  width: 100%;
+  margin: 0;
+  padding: clamp(14px, 2.7vw, 28px);
+}
+
+.lesson-stage-top,
+.lesson-plan-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.lesson-stage-top p { margin: 0; font-size: .875rem; font-weight: 650; }
+.lesson-stage button.secondary { color: var(--home-paper); border-color: #a5baaa; }
+.lesson-stage-top button { padding: 8px 12px; font-size: .875rem; }
+.lesson-current { margin: 18px auto 0; }
+
+.lesson-current h2,
+.lesson-complete {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.5vw, 2.75rem);
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+
+.lesson-complete { padding-block: 45px 22px; color: var(--home-lime); }
+
+.lesson-clock {
+  color: var(--home-lime);
+  font-size: clamp(3.5rem, 9vw, 7.5rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -.065em;
+  line-height: 1.12;
+  margin-block: 8px;
+}
+
+.lesson-progress {
+  display: block;
+  appearance: none;
+  width: 100%;
+  height: 9px;
+  border: 0;
+  border-radius: 9px;
+  overflow: hidden;
+  background: #416154;
+  accent-color: var(--home-lime);
+}
+
+.lesson-progress::-webkit-progress-bar { background: #416154; }
+.lesson-progress::-webkit-progress-value { background: var(--home-lime); }
+.lesson-progress::-moz-progress-bar { background: var(--home-lime); }
+
+.lesson-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-block: 14px;
+}
+
+.lesson-controls button { padding: 8px 12px; }
+.lesson-controls .lesson-primary { background: var(--home-lime); color: var(--home-ink); border-color: var(--home-lime); }
+.lesson-controls .lesson-primary[data-invalid] {
+  background: var(--home-coral);
+  color: var(--home-ink);
+  border-color: var(--home-coral);
+}
+
+.lesson-next {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: baseline;
+  gap: 10px;
+  padding: 11px 13px;
+  border-radius: 8px;
+  background: var(--home-lilac);
+  color: var(--home-ink);
+  text-align: left;
+}
+
+.lesson-next span { font-size: .85em; }
+.lesson-next strong { overflow-wrap: anywhere; }
+
+.lesson-plan {
+  padding: clamp(12px, 2vw, 20px);
+  border: 2px solid var(--home-plum);
+  border-radius: 14px;
+  background: #f0ddff;
+  box-shadow: 5px 6px 0 var(--home-plum);
+}
+
+.lesson-plan-heading h2 { margin: 0; font-size: 1.4rem; }
+.lesson-plan-heading span { font-size: .875rem; font-weight: 700; }
+.lesson-plan .small { margin: 6px 0 0; color: var(--home-ink); }
+.lesson-plan .small:empty { display: none; }
+.lesson-validation {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 11px 13px;
+  border: 2px solid var(--home-plum);
+  border-radius: 9px;
+  background: var(--home-coral);
+  color: var(--home-ink);
+}
+
+.lesson-warning-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  background: var(--home-plum);
+  color: var(--home-paper);
+  font-weight: 800;
+}
+
+.lesson-validation strong { display: block; line-height: 1.35; }
+.lesson-validation p { margin: 3px 0 0; font-size: .875rem; line-height: 1.4; }
+.lesson-plan fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.lesson-activities { list-style: none; padding: 0; margin: 12px 0; }
+
+.lesson-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px;
+  padding-block: 5px;
+  border-bottom: 1px solid #d5bce2;
+}
+
+.lesson-row-inputs {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 5px;
+}
+
+.lesson-step { text-align: center; font-size: .875rem; font-weight: 800; }
+
+.lesson-row input {
+  min-width: 0;
+  min-height: 44px;
+  padding: 7px;
+  border-color: #997da5;
+  background: var(--home-paper);
+}
+
+.lesson-row input[aria-invalid="true"] { border-color: #9b2e28; box-shadow: inset 0 0 0 1px #9b2e28; }
+
+.lesson-row[data-invalid] {
+  border-radius: 6px;
+  border-bottom-color: #c56f63;
+  background: #ffded7;
+  box-shadow: inset 3px 0 #9b2e28;
+}
+
+.lesson-row[data-invalid] .lesson-step { color: #842922; }
+
+.lesson-row-errors {
+  grid-column: 1 / -1;
+  margin-inline-start: 1.55rem;
+  color: #842922;
+}
+
+.lesson-row-errors p { margin: 0 0 3px; font-size: .8125rem; font-weight: 700; line-height: 1.4; }
+
+.lesson-duration {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  font-size: .75rem;
+}
+
+.lesson-duration input { width: 3.15rem; }
+.lesson-row-actions { display: flex; }
+
+.lesson-plan button.secondary { color: var(--home-plum); border-color: var(--home-plum); }
+.lesson-row-actions button.secondary {
+  width: 44px;
+  min-height: 44px;
+  border-color: transparent;
+  padding: 0;
+  font-size: 1.25rem;
+}
+
+.lesson-plan #lesson-add { background: var(--home-paper); box-shadow: 2px 3px 0 var(--home-plum); }
+.lesson-sound {
+  margin-top: 18px;
+  padding-top: 14px;
+  border-top: 1px solid #997da5;
+}
+
+.lesson-sound label { margin: 0 0 7px; }
+.lesson-sound-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.lesson-sound-select {
+  position: relative;
+  flex: 1 1 8rem;
+}
+
+.lesson-sound-select select {
+  appearance: none;
+  min-height: 44px;
+  padding-inline-end: 2.25rem;
+  background: var(--home-paper);
+  border-color: #997da5;
+}
+
+.lesson-sound-select::after {
+  content: "";
+  position: absolute;
+  inset-inline-end: 1rem;
+  top: 50%;
+  width: .45rem;
+  height: .45rem;
+  border: solid var(--home-ink);
+  border-width: 0 2px 2px 0;
+  transform: translateY(-75%) rotate(45deg);
+  pointer-events: none;
+}
+
+@media (forced-colors: active) {
+  .lesson-sound-select select { appearance: auto; padding-inline-end: 12px; }
+  .lesson-sound-select::after { content: none; }
+}
+
+.lesson-presentation {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.lesson-stage:fullscreen,
+.lesson-presentation .lesson-stage {
+  display: grid;
+  width: 100%;
+  min-height: 100%;
+  max-width: none;
+  border-radius: 0;
+  grid-template-rows: auto minmax(min-content, 1fr) auto auto;
+  align-content: start;
+  justify-content: stretch;
+  align-items: center;
+  padding: clamp(14px, 4vmin, 48px);
+}
+
+:is(.lesson-stage:fullscreen, .lesson-presentation) .lesson-current { width: min(100%, 1050px); margin: 0 auto; }
+:is(.lesson-stage:fullscreen, .lesson-presentation) :is(.lesson-current h2, .lesson-complete) {
+  font-size: clamp(1.6rem, 6vmin, 5rem);
+}
+:is(.lesson-stage:fullscreen, .lesson-presentation) .lesson-clock { font-size: clamp(3.5rem, 23vmin, 19rem); }
+:is(.lesson-stage:fullscreen, .lesson-presentation) .lesson-next { font-size: clamp(1rem, 3vmin, 2rem); }
+
+.lesson-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 920px) {
+  .lesson-workspace { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 450px) {
+  .lesson-row { grid-template-columns: minmax(0, 1fr); }
+  .lesson-row-actions { justify-self: end; margin-top: -2px; }
+  .lesson-row-errors { grid-row: 2; }
+}
+
+  </style>
+</head>
+<body class="home-page tools-page lesson-page">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="home-header">
+      <a class="brand" href="https://classmade.org/" aria-label="Classmade home"><span class="home-mark" aria-hidden="true">✱</span>classmade</a>
+      <nav aria-label="Main navigation"><a href="https://classmade.org/apps/" aria-current="page">App library</a><a href="https://classmade.org/requests/">Request board</a><a href="https://classmade.org/about/">About</a></nav>
+    </header>
+    <main id="main">
+      <div class="tool-heading">
+        <section class="page-intro">
+          <h1><span class="home-highlight">Lesson timer</span></h1>
+          <p>Plan your activities, then start once for the whole lesson.</p>
+        </section>
+      </div>
+
+      <noscript><p class="notice">Enable JavaScript to edit and run your lesson timer.</p></noscript>
+      <div class="lesson-workspace" id="lesson-workspace" hidden>
+        <section class="timer-shell lesson-stage" id="lesson-stage" aria-label="Classroom display">
+          <div class="lesson-stage-top">
+            <p id="lesson-position">Activity 1 of 5 · Ready</p>
+            <button type="button" class="secondary" id="lesson-fullscreen">Fullscreen</button>
+          </div>
+          <div class="lesson-current" id="lesson-current">
+            <h2 id="lesson-activity">Bell ringer</h2>
+            <div class="lesson-clock" id="lesson-clock" role="timer" aria-label="Time remaining" aria-live="off">05:00</div>
+            <progress class="lesson-progress" id="lesson-progress" max="1" value="1" aria-hidden="true"></progress>
+          </div>
+          <h2 class="lesson-complete" id="lesson-complete" hidden>Lesson complete</h2>
+          <div class="lesson-controls">
+            <button type="submit" form="lesson-plan" class="lesson-primary" id="lesson-start">Start lesson</button>
+            <button type="button" class="lesson-primary" id="lesson-pause" hidden>Pause</button>
+            <button type="button" class="secondary" id="lesson-skip" hidden>Skip activity</button>
+            <button type="button" class="secondary" id="lesson-reset" hidden>Reset lesson</button>
+          </div>
+          <div class="lesson-next" id="lesson-next">
+            <span>Up next</span>
+            <strong id="lesson-next-name">Partner work</strong>
+            <span id="lesson-next-time">10 min</span>
+          </div>
+          <p class="lesson-sr" id="lesson-status" role="status"></p>
+        </section>
+
+        <form id="lesson-plan" class="lesson-plan" aria-labelledby="lesson-plan-title" novalidate>
+          <div class="lesson-plan-heading">
+            <h2 id="lesson-plan-title">Lesson plan</h2>
+            <span id="lesson-total">45 min total</span>
+          </div>
+          <p class="small" id="lesson-plan-hint">Valid plans save in this browser.</p>
+          <div class="lesson-validation" id="lesson-validation" hidden>
+            <span class="lesson-warning-icon" aria-hidden="true">!</span>
+            <div>
+              <strong id="lesson-validation-title"></strong>
+              <p>Fix the highlighted fields to start the lesson.</p>
+            </div>
+          </div>
+          <fieldset id="lesson-fields">
+            <legend class="lesson-sr">Timed activities</legend>
+            <ol class="lesson-activities" id="lesson-activities"></ol>
+            <button type="button" class="secondary" id="lesson-add">+ Add activity</button>
+          </fieldset>
+          <p class="small" id="lesson-plan-status" role="status"></p>
+          <div class="lesson-sound">
+            <label for="lesson-sound-tone">Activity transition sound</label>
+            <div class="lesson-sound-controls">
+              <div class="lesson-sound-select">
+                <select id="lesson-sound-tone">
+                  <option value="off">Off</option>
+                  <option value="gentle">Gentle chime</option>
+                  <option value="bright">Bright chime</option>
+                </select>
+              </div>
+              <button type="button" class="secondary" id="lesson-sound-preview" disabled>Preview sound</button>
+            </div>
+            <p class="small" id="lesson-sound-status" role="status"></p>
+          </div>
+        </form>
+
+        <template id="lesson-row">
+          <li class="lesson-row">
+            <div class="lesson-row-inputs">
+              <span class="lesson-step" aria-hidden="true"></span>
+              <input type="text" maxlength="70" required placeholder="Activity name" data-field="name">
+              <label class="lesson-duration">
+                <span class="lesson-sr"></span>
+                <input type="number" inputmode="numeric" min="1" max="180" step="1" required data-field="minutes">
+                <span aria-hidden="true">min</span>
+              </label>
+            </div>
+            <div class="lesson-row-actions">
+              <button type="button" class="secondary" data-action="up"><span aria-hidden="true">↑</span></button>
+              <button type="button" class="secondary" data-action="down"><span aria-hidden="true">↓</span></button>
+              <button type="button" class="secondary" data-action="remove"><span aria-hidden="true">×</span></button>
+            </div>
+            <div class="lesson-row-errors" hidden>
+              <p data-error="name"></p>
+              <p data-error="minutes"></p>
+            </div>
+          </li>
+        </template>
+      </div>
+      <dialog class="lesson-presentation" id="lesson-presentation" aria-label="Lesson presentation"></dialog>
+    </main>
+    <footer class="footer">
+      <div><strong>classmade</strong><p>Small classroom tools. Yours to make your own.</p></div>
+      <div><a href="https://classmade.org/apps/">App library</a><a href="https://classmade.org/requests/">Share an idea</a><a href="https://classmade.org/privacy/">Privacy &amp; contact</a><p>Free to use · No account needed</p></div>
+    </footer>
+  </div>
+  <script>
+function formatTime(milliseconds){const total=Math.max(0,Math.ceil(milliseconds/1000));return `${String(Math.floor(total/60)).padStart(2,'0')}:${String(total%60).padStart(2,'0')}`;}
+class Countdown {
+ constructor(duration=300000){this.duration=duration;this.remaining=duration;this.deadline=null;}
+ setDuration(ms){if(!Number.isFinite(ms)||ms<1000||ms>10800000)throw new RangeError('Choose a time from 1 second to 180 minutes.');this.duration=ms;this.reset();}
+ start(now){if(this.remaining<=0)this.remaining=this.duration;this.deadline=now+this.remaining;}
+ tick(now){if(this.deadline===null)return false;this.remaining=Math.max(0,this.deadline-now);if(this.remaining===0){this.deadline=null;return true;}return false;}
+ pause(now){const completed=this.tick(now);this.deadline=null;return completed;}
+ extend(ms,now){
+  if(!Number.isFinite(ms)||ms<=0)return 0;
+  this.tick(now);
+  const added=Math.min(ms,10800000-this.duration);
+  this.duration+=added;
+  this.remaining+=added;
+  if(this.running)this.deadline+=added;
+  return added;
+ }
+ reset(){this.remaining=this.duration;this.deadline=null;}
+ get running(){return this.deadline!==null;}
+}
+
+const maxActivities = 20;
+
+const starterPlan = [
+  { name: 'Bell ringer', minutes: 5 },
+  { name: 'Partner work', minutes: 10 },
+  { name: 'Direct instruction', minutes: 20 },
+  { name: 'Exit ticket', minutes: 5 },
+  { name: 'Homework', minutes: 5 },
+];
+
+function isActivityName(name) {
+  return typeof name === 'string' && name.trim().length > 0 && name.length <= 70;
+}
+
+function isActivityDuration(minutes) {
+  return Number.isInteger(minutes) && minutes >= 1 && minutes <= 180;
+}
+
+function isLessonPlan(plan) {
+  return Array.isArray(plan) && plan.length >= 1 && plan.length <= maxActivities &&
+    plan.every(activity => activity && isActivityName(activity.name) && isActivityDuration(activity.minutes));
+}
+
+class LessonTimer {
+  constructor(plan) {
+    if (!isLessonPlan(plan)) throw new RangeError('Enter a name and 1 to 180 minutes for every activity.');
+    this.plan = plan;
+    this.index = 0;
+    this.phase = 'ready';
+    this.deadline = null;
+    this.remaining = this.duration;
+  }
+
+  get current() { return this.plan[this.index]; }
+  get next() { return this.plan[this.index + 1]; }
+  get duration() { return (this.current?.minutes ?? 0) * 60_000; }
+
+  start(now) {
+    if (this.phase !== 'ready' && this.phase !== 'paused') return;
+    this.deadline = now + this.remaining;
+    this.phase = 'running';
+  }
+
+  advance(from) {
+    this.index++;
+    this.remaining = this.duration;
+    if (!this.current) this.phase = 'complete';
+    this.deadline = this.phase === 'running' ? from + this.remaining : null;
+  }
+
+  tick(now) {
+    if (this.phase !== 'running') return;
+    while (this.phase === 'running' && now >= this.deadline) {
+      this.advance(this.deadline);
+    }
+    if (this.phase === 'running') this.remaining = this.deadline - now;
+  }
+
+  pause(now) {
+    this.tick(now);
+    if (this.phase !== 'running') return;
+    this.phase = 'paused';
+    this.deadline = null;
+  }
+
+  skip(now) {
+    // If a natural transition just happened, keep the newly started activity.
+    const index = this.index;
+    this.tick(now);
+    if (this.index === index && (this.phase === 'running' || this.phase === 'paused')) {
+      this.advance(now);
+    }
+  }
+}
+
+function createTimerChime() {
+  let audio;
+
+  async function prepare() {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) throw new Error('Audio is unavailable on this device.');
+    audio ??= new AudioContext();
+    if (audio.state !== 'running') await audio.resume();
+  }
+
+  async function play(tone) {
+    await prepare();
+    const notes = tone === 'bright' ? [659.25, 880] : [523.25, 659.25];
+    const start = audio.currentTime;
+    notes.forEach((frequency, index) => {
+      const oscillator = audio.createOscillator();
+      const gain = audio.createGain();
+      oscillator.connect(gain).connect(audio.destination);
+      const at = start + index * .6;
+      oscillator.frequency.value = frequency;
+      gain.gain.setValueAtTime(0, at);
+      gain.gain.linearRampToValueAtTime(.12, at + .02);
+      gain.gain.exponentialRampToValueAtTime(.001, at + .55);
+      oscillator.start(at);
+      oscillator.stop(at + .6);
+    });
+  }
+
+  return { prepare, play };
+}
+
+
+const byId = name => document.getElementById('lesson-' + name);
+const workspace = byId('workspace');
+const stage = byId('stage');
+const presentation = byId('presentation');
+const form = byId('plan');
+const fields = byId('fields');
+const list = byId('activities');
+const template = byId('row');
+const start = byId('start');
+const pause = byId('pause');
+const skip = byId('skip');
+const reset = byId('reset');
+const add = byId('add');
+const fullscreen = byId('fullscreen');
+const soundTone = byId('sound-tone');
+const soundPreview = byId('sound-preview');
+const soundStatus = byId('sound-status');
+const chime = createTimerChime();
+const storageKey = 'classmade-lesson-plan';
+const soundKey = 'classmade-lesson-sound';
+
+function loadPlan() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(storageKey));
+    if (isLessonPlan(saved)) return saved;
+  } catch {
+    // The starter plan also works when storage is unavailable.
+  }
+  return starterPlan;
+}
+
+let timer = new LessonTimer(loadPlan());
+let interval;
+let lastAnnouncement;
+
+function renderRows(plan) {
+  list.replaceChildren(...plan.map((activity, index) => {
+    const row = template.content.firstElementChild.cloneNode(true);
+    const step = 'Activity ' + (index + 1);
+    row.querySelector('.lesson-step').textContent = index + 1;
+    const name = row.querySelector('[data-field="name"]');
+    name.value = activity.name;
+    name.setAttribute('aria-label', step + ' name');
+    row.querySelector('.lesson-sr').textContent = step + ' duration in minutes';
+    const minutes = row.querySelector('[data-field="minutes"]');
+    minutes.value = Number.isFinite(activity.minutes) ? activity.minutes : '';
+    for (const input of [name, minutes]) {
+      const field = input.dataset.field;
+      const error = row.querySelector(`[data-error="${field}"]`);
+      error.id = `lesson-activity-${index + 1}-${field}-error`;
+      input.setAttribute('aria-describedby', error.id);
+    }
+    const up = row.querySelector('[data-action="up"]');
+    const down = row.querySelector('[data-action="down"]');
+    const remove = row.querySelector('[data-action="remove"]');
+    up.setAttribute('aria-label', 'Move ' + step.toLowerCase() + ' up');
+    down.setAttribute('aria-label', 'Move ' + step.toLowerCase() + ' down');
+    remove.setAttribute('aria-label', 'Remove ' + step.toLowerCase());
+    up.disabled = index === 0;
+    down.disabled = index === plan.length - 1;
+    remove.disabled = plan.length === 1;
+    return row;
+  }));
+  add.disabled = plan.length >= maxActivities;
+  updatePlan();
+}
+
+function readPlan() {
+  return Array.from(list.children, row => ({
+    name: row.querySelector('[data-field="name"]').value,
+    minutes: row.querySelector('[data-field="minutes"]').valueAsNumber,
+  }));
+}
+
+function showFieldError(row, field, message) {
+  const input = row.querySelector(`[data-field="${field}"]`);
+  const error = row.querySelector(`[data-error="${field}"]`);
+  input.setAttribute('aria-invalid', String(Boolean(message)));
+  if (error.textContent !== message) error.textContent = message;
+  error.hidden = !message;
+}
+
+function updatePlan() {
+  const plan = readPlan();
+  const valid = isLessonPlan(plan);
+  let invalidRows = 0;
+  plan.forEach((activity, index) => {
+    const row = list.children[index];
+    const nameError = isActivityName(activity.name) ? '' : 'Enter an activity name (up to 70 characters).';
+    const duration = row.querySelector('[data-field="minutes"]');
+    const durationError = isActivityDuration(activity.minutes) ? '' : duration.validity.valueMissing && !duration.validity.badInput
+      ? 'Enter the duration in minutes.'
+      : 'Enter a whole number from 1 to 180 minutes.';
+    showFieldError(row, 'name', nameError);
+    showFieldError(row, 'minutes', durationError);
+    const invalid = Boolean(nameError || durationError);
+    row.toggleAttribute('data-invalid', invalid);
+    row.querySelector('.lesson-row-errors').hidden = !invalid;
+    invalidRows += Number(invalid);
+  });
+  const summary = invalidRows === 1 ? '1 activity needs attention' : `${invalidRows} activities need attention`;
+  byId('validation').hidden = valid;
+  byId('validation-title').textContent = valid ? '' : summary;
+  const planStatus = byId('plan-status');
+  const message = valid ? '' : summary + '. Fix the highlighted fields to start the lesson.';
+  if (planStatus.textContent !== message) planStatus.textContent = message;
+  planStatus.classList.toggle('lesson-sr', !valid);
+  byId('total').textContent = valid ? plan.reduce((sum, activity) => sum + activity.minutes, 0) + ' min total' : '';
+  fullscreen.disabled = !valid;
+  start.toggleAttribute('data-invalid', !valid);
+  start.textContent = valid ? 'Start lesson' : 'Fix lesson plan';
+  if (valid) {
+    timer = new LessonTimer(plan.map(activity => ({ ...activity, name: activity.name.trim() })));
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(timer.plan));
+    } catch {
+      byId('plan-hint').textContent = 'Browser storage is unavailable. Keep this tab open to use your edits.';
+    }
+  }
+  renderStage();
+  return valid;
+}
+
+function renderStage() {
+  const ready = timer.phase === 'ready';
+  const complete = timer.phase === 'complete';
+  const active = document.activeElement;
+  const position = complete ? '' : `Activity ${timer.index + 1} of ${timer.plan.length}`;
+  const state = {
+    ready: start.hasAttribute('data-invalid') ? 'Setup incomplete' : 'Ready',
+    paused: 'Paused',
+    running: '',
+    complete: 'Finished',
+  }[timer.phase];
+  byId('position').textContent = [position, state].filter(Boolean).join(' · ');
+  byId('activity').textContent = timer.current?.name ?? '';
+  byId('clock').textContent = formatTime(timer.remaining);
+  byId('progress').value = timer.duration ? timer.remaining / timer.duration : 0;
+  byId('current').hidden = complete;
+  byId('complete').hidden = !complete;
+  byId('next').hidden = complete;
+  byId('next-name').textContent = timer.next?.name ?? 'End of lesson';
+  byId('next-time').textContent = timer.next ? timer.next.minutes + ' min' : '';
+  start.hidden = !ready;
+  pause.hidden = ready || complete;
+  pause.textContent = timer.phase === 'paused' ? 'Resume' : 'Pause';
+  skip.hidden = ready || complete;
+  reset.hidden = ready;
+  fields.disabled = !ready;
+  if (!ready) byId('plan-status').textContent = 'Reset the lesson to edit the plan.';
+
+  if (active === start && start.hidden) pause.focus();
+  if (complete && (active === pause || active === skip)) reset.focus();
+  if (ready && active === reset) start.focus();
+
+  const announcement = complete ? 'Lesson complete.' : `${position}. ${timer.current.name}. ${state}`.trim();
+  if (!ready && announcement !== lastAnnouncement) byId('status').textContent = announcement;
+  lastAnnouncement = ready ? '' : announcement;
+}
+
+function stopClock() {
+  clearInterval(interval);
+  interval = undefined;
+}
+
+function showSoundError() {
+  soundStatus.textContent = 'Sound could not play on this device.';
+}
+
+function announceTransition(previousIndex) {
+  if (timer.current && timer.index !== previousIndex && soundTone.value !== 'off') {
+    void chime.play(soundTone.value).catch(showSoundError);
+  }
+}
+
+function tick() {
+  const index = timer.index;
+  timer.tick(Date.now());
+  if (timer.index !== index) {
+    renderStage();
+    announceTransition(index);
+  } else {
+    const time = formatTime(timer.remaining);
+    if (byId('clock').textContent !== time) byId('clock').textContent = time;
+    byId('progress').value = timer.remaining / timer.duration;
+  }
+  if (timer.phase === 'complete') stopClock();
+}
+
+function startClock() {
+  timer.start(Date.now());
+  if (soundTone.value !== 'off') void chime.prepare().catch(showSoundError);
+  renderStage();
+  interval = setInterval(tick, 200);
+}
+
+fields.addEventListener('input', () => updatePlan());
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  if (timer.phase !== 'ready') return;
+  if (updatePlan()) startClock();
+  else list.querySelector('[aria-invalid="true"]')?.focus();
+});
+
+pause.addEventListener('click', () => {
+  if (timer.phase === 'paused') {
+    startClock();
+    return;
+  }
+  const index = timer.index;
+  timer.pause(Date.now());
+  stopClock();
+  renderStage();
+  announceTransition(index);
+});
+
+skip.addEventListener('click', () => {
+  const index = timer.index;
+  timer.skip(Date.now());
+  if (timer.phase === 'complete') stopClock();
+  renderStage();
+  announceTransition(index);
+});
+
+reset.addEventListener('click', () => {
+  stopClock();
+  timer = new LessonTimer(timer.plan);
+  byId('plan-status').textContent = '';
+  byId('status').textContent = 'Lesson reset.';
+  renderStage();
+});
+
+list.addEventListener('click', event => {
+  const action = event.target.closest('button')?.dataset.action;
+  if (!action) return;
+
+  const index = Array.from(list.children).indexOf(event.target.closest('li'));
+  const plan = readPlan();
+  let destination = index + (action === 'up' ? -1 : 1);
+  if (action === 'remove') {
+    plan.splice(index, 1);
+    destination = Math.min(index, plan.length - 1);
+  } else {
+    [plan[index], plan[destination]] = [plan[destination], plan[index]];
+  }
+  renderRows(plan);
+  const row = list.children[destination];
+  const movedButton = row.querySelector(`[data-action="${action}"]`);
+  const focus = action !== 'remove' && !movedButton.disabled ? movedButton : row.querySelector('[data-field="name"]');
+  focus.focus();
+});
+
+add.addEventListener('click', () => {
+  const plan = readPlan();
+  plan.push({ name: '', minutes: 5 });
+  renderRows(plan);
+  list.lastElementChild.querySelector('[data-field="name"]').focus();
+});
+
+fullscreen.addEventListener('click', async () => {
+  if (presentation.open) {
+    presentation.close();
+    return;
+  }
+  if (document.fullscreenElement === stage) {
+    await document.exitFullscreen();
+    return;
+  }
+  try {
+    if (document.fullscreenEnabled) {
+      await stage.requestFullscreen();
+      return;
+    }
+  } catch {
+    // The display can still fill the viewport if the browser denies fullscreen.
+  }
+  presentation.append(stage);
+  fullscreen.textContent = 'Exit fullscreen';
+  presentation.showModal();
+  fullscreen.focus();
+});
+
+presentation.addEventListener('close', () => {
+  workspace.prepend(stage);
+  fullscreen.textContent = 'Fullscreen';
+  fullscreen.focus();
+});
+
+document.addEventListener('fullscreenchange', () => {
+  fullscreen.textContent = document.fullscreenElement === stage ? 'Exit fullscreen' : 'Fullscreen';
+});
+
+document.addEventListener('visibilitychange', () => {
+  if (timer.phase === 'running') tick();
+});
+
+soundTone.addEventListener('change', () => {
+  soundPreview.disabled = soundTone.value === 'off';
+  soundStatus.textContent = '';
+  if (soundTone.value !== 'off') void chime.prepare().catch(showSoundError);
+  try {
+    localStorage.setItem(soundKey, soundTone.value);
+  } catch {
+    // The sound selection still applies to the current tab.
+  }
+});
+
+soundPreview.addEventListener('click', () => {
+  soundStatus.textContent = '';
+  void chime.play(soundTone.value).catch(showSoundError);
+});
+
+try {
+  const savedTone = localStorage.getItem(soundKey);
+  if (savedTone === 'gentle' || savedTone === 'bright') {
+    soundTone.value = savedTone;
+    soundPreview.disabled = false;
+  }
+} catch {
+  // Leave the sound off when browser storage is unavailable.
+}
+
+renderRows(timer.plan);
+workspace.hidden = false;
+
+  </script>
+</body>
+</html>
