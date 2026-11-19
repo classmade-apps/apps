@@ -6,7 +6,7 @@ Classmade builds small, free tools around real classroom problems. A recurring b
 
 This repository holds the code for those tools. Teachers can use them as they are, change them for their classroom, or share their own versions. Each app has its own folder and instructions.
 
-**Website: [classmade.org](https://classmade.org) — coming soon.** The website will bring together the app library and a place for teachers to suggest problems to solve. Until it launches, use the downloads and instructions here.
+Visit [Classmade.org](https://classmade.org) to browse the app library or [suggest a tool](https://classmade.org/requests/). You can also download and customize the timer from this repository.
 
 ## First app
 
@@ -39,7 +39,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow. No Cloudflare account, 
 
 For now, [open an issue](https://github.com/classmade-apps/apps/issues) with the task you’re trying to complete, your current workaround, and the smallest improvement that would help. For a bug, include what you did, what you expected, and what happened instead.
 
-GitHub issues are public. Please don’t include student names, email addresses, grades, or other private information. Once the website launches, its idea form will also offer optional private contact details for follow-up.
+GitHub issues are public. Please don’t include student names, email addresses, grades, or other private information. The website’s idea form offers optional private contact details for follow-up.
 
 Submitting an idea does not guarantee a build or a delivery date. Whole-school systems and full learning platforms are outside this project’s scope.
 

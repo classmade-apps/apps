@@ -2,7 +2,7 @@
 
 A calm, readable countdown for independent reading, group work, transitions, or a short thinking break.
 
-Part of **[Classmade](https://classmade.org)** — small classroom tools, yours to make your own. Our website is coming soon; the timer can be downloaded and used now.
+Part of **[Classmade](https://classmade.org)** — small classroom tools, yours to make your own. Use the [classroom timer online](https://classmade.org/apps/classroom-timer/) or download a copy to run offline.
 
 ## Use it now
 
