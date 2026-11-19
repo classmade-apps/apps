@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Classroom Group Shuffler | Classmade</title>
+  <meta name="description" content="Make random classroom groups from student numbers or a pasted list. Swap two students, then copy or print your groups. The roster stays in your browser.">
+  <meta name="theme-color" content="#204d3d">
+  <meta property="og:title" content="Classroom Group Shuffler | Classmade">
+  <meta property="og:description" content="Shuffle your class into groups, swap individual students, and copy or print the result.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/home.css">
+  <link rel="stylesheet" href="/group-shuffler.css">
+</head>
+<body class="home-page tools-page group-page">
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="wrap">
+    <header class="home-header">
+      <a class="brand" href="/" aria-label="Classmade home"><span class="home-mark" aria-hidden="true">✱</span>classmade</a>
+      <nav aria-label="Main navigation"><a href="/apps/" aria-current="page">App library</a><a href="/requests/">Request board</a><a href="/about/">About</a></nav>
+    </header>
+    <main id="main">
+      <nav class="crumb" aria-label="Breadcrumb"><a href="/apps/">App library</a><span aria-hidden="true">/</span><span aria-current="page">Group shuffler</span></nav>
+      <section class="page-intro group-intro">
+        <h1>Group <span class="home-highlight">shuffler</span></h1>
+        <p>Shuffle your class into groups and swap any two students between groups.</p>
+      </section>
+
+      <noscript><p class="notice">Enable JavaScript to make and adjust your groups.</p></noscript>
+      <div class="group-workspace" id="group-workspace" hidden>
+        <form id="group-setup" class="group-setup" aria-labelledby="group-setup-title" autocomplete="off" novalidate>
+          <h2 id="group-setup-title">Class setup</h2>
+          <fieldset class="group-mode">
+            <legend>Roster type</legend>
+            <div class="group-mode-options">
+              <label><input type="radio" name="roster-mode" value="numbers" checked><span>Student numbers</span></label>
+              <label><input type="radio" name="roster-mode" value="labels"><span>Paste labels</span></label>
+            </div>
+          </fieldset>
+          <div id="group-number-fields" class="group-inputs">
+            <div>
+              <label for="group-students">Students</label>
+              <input id="group-students" type="number" inputmode="numeric" min="2" max="200" step="1" value="24" required aria-describedby="group-students-error">
+              <p id="group-students-error" class="group-error" hidden></p>
+            </div>
+            <div id="group-count-field">
+              <label for="group-count">Groups</label>
+              <input id="group-count" type="number" inputmode="numeric" min="2" max="24" step="1" value="6" required aria-describedby="group-count-error">
+              <p id="group-count-error" class="group-error" hidden></p>
+            </div>
+          </div>
+          <div id="group-label-fields" class="group-label-fields" hidden>
+            <div>
+              <label for="group-labels">Student labels</label>
+              <textarea id="group-labels" rows="4" placeholder="Student A&#10;Student B&#10;Student C" aria-describedby="group-labels-hint group-labels-error"></textarea>
+              <p class="small" id="group-labels-hint">One label per line. Use distinct labels for students with the same name.</p>
+              <p id="group-labels-error" class="group-error" hidden></p>
+            </div>
+          </div>
+          <button type="submit" class="group-shuffle" id="group-shuffle">Shuffle groups</button>
+          <p class="group-feedback" id="group-feedback" role="status"></p>
+          <p class="small group-privacy">Your roster stays in this tab.</p>
+        </form>
+
+        <section class="group-output" aria-labelledby="group-output-title">
+          <div class="group-output-heading">
+            <div>
+              <h2 id="group-output-title" tabindex="-1">Your groups</h2>
+              <p id="group-summary" class="small" hidden></p>
+            </div>
+            <div class="group-output-actions" id="group-output-actions" hidden>
+              <button type="button" class="secondary" id="group-copy">Copy groups</button>
+              <button type="button" class="secondary" id="group-print">Print groups</button>
+            </div>
+          </div>
+          <div class="group-empty" id="group-empty">
+            <p>Choose your class size or paste a roster, then shuffle.</p>
+          </div>
+          <div class="group-swap" id="group-swap" hidden>
+            <p id="group-swap-help" role="status">Select two students in different groups to swap them.</p>
+            <button type="button" class="secondary" id="group-cancel" hidden>Cancel swap</button>
+            <button type="button" class="secondary" id="group-undo" hidden>Undo swap</button>
+          </div>
+          <p id="group-export-status" class="small" role="status" hidden></p>
+          <div class="group-grid" id="group-grid"></div>
+        </section>
+      </div>
+
+      <dialog class="group-copy-dialog" id="group-copy-dialog" aria-labelledby="group-copy-title">
+        <form method="dialog">
+          <h2 id="group-copy-title">Copy groups</h2>
+          <p id="group-copy-help">Use your device’s copy command to copy the selected text.</p>
+          <textarea id="group-copy-text" rows="8" readonly aria-label="Groups to copy" aria-describedby="group-copy-help"></textarea>
+          <button type="submit" class="secondary">Close</button>
+        </form>
+      </dialog>
+
+      <section class="tool-details group-guide" aria-labelledby="group-guide-title">
+        <h2 id="group-guide-title">How the group shuffler works</h2>
+        <p>Use <strong>Student numbers</strong> and enter your class size to group students by number. If you want names or initials on the groups, choose <strong>Paste labels</strong> and enter one label per line.</p>
+        <p>Set the number of groups you need and select <strong>Shuffle groups</strong>. Everyone gets assigned to one group, and group sizes differ by at most one student. For example, 26 students in six groups gives you two groups of five and four groups of four.</p>
+
+        <h3>Swap two students</h3>
+        <p>Select one student, then select a student in a different group. They trade places and everyone else stays in their group. Choose <strong>Undo swap</strong> to reverse the last swap, or <strong>Shuffle groups</strong> to start over with a fresh draw.</p>
+
+        <h3>Share the finished groups</h3>
+        <p>Use <strong>Copy groups</strong> to paste the assignments into a slide or document. <strong>Print groups</strong> prints just the group lists and their headings. The roster stays in the open tab, so copy or print the groups before closing it.</p>
+        <p>To use the tool without internet, <a href="/downloads/group-shuffler" download="group-shuffler.html">download the shuffler</a> and open the HTML file in your browser. You can also <a href="https://github.com/classmade-apps/apps/tree/main/group-shuffler">view the source code on GitHub</a>.</p>
+      </section>
+    </main>
+    <footer class="footer">
+      <div><strong>classmade</strong><p>Small classroom tools. Yours to make your own.</p></div>
+      <div><a href="/apps/">App library</a><a href="/about/">About</a><a href="/requests/">Share an idea</a><a href="/privacy/">Privacy &amp; contact</a><p>Free to use · No account needed</p></div>
+    </footer>
+  </div>
+  <script type="module" src="/group-shuffler.js"></script>
+</body>
+</html>

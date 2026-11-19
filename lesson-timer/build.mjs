@@ -1,5 +1,5 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import { renderLessonTimer } from './render-lesson-timer.mjs';
+import { renderStandaloneApp } from '../shared/render-standalone-app.mjs';
 
 const read = path => readFile(new URL(path, import.meta.url), 'utf8');
 const [page, styles, scripts, license] = await Promise.all([
@@ -9,5 +9,5 @@ const [page, styles, scripts, license] = await Promise.all([
   read('../LICENSE'),
 ]);
 
-await writeFile(new URL('index.html', import.meta.url), renderLessonTimer({ page, styles, scripts, license }));
+await writeFile(new URL('index.html', import.meta.url), renderStandaloneApp({ page, styles, scripts, license, entry: '/lesson-timer.js' }));
 console.log('Built lesson-timer/index.html.');

@@ -1,7 +1,7 @@
-// Keep the downloadable timer in sync with its readable source.
-export function renderLessonTimer({ page, styles, scripts, license }) {
-  const scriptTag = '<script type="module" src="/lesson-timer.js"></script>';
-  if (!page.includes(scriptTag)) throw new Error('Missing Lesson Timer script in the page template.');
+// Keep standalone apps in sync with their readable source.
+export function renderStandaloneApp({ page, styles, scripts, license, entry }) {
+  const scriptTag = `<script type="module" src="${entry}"></script>`;
+  if (!page.includes(scriptTag)) throw new Error(`Missing ${entry} script in the page template.`);
 
   const code = scripts
     .map(source => source.replace(/^import[ \t]+[\s\S]*?;\r?\n/gm, '').replace(/^export /gm, ''))

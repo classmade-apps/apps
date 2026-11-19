@@ -14,6 +14,7 @@ Visit [Classmade.org](https://classmade.org) to browse the app library or [sugge
 | --- | --- | --- |
 | [Classroom timer](classroom-timer/) | A calm countdown for reading, group work, and transitions, with optional sound and fullscreen. | [Instructions and customization](classroom-timer/README.md) |
 | [Lesson Timer](lesson-timer/) | A sequence of timed activities with a projector view and optional transition chimes. | [Instructions and source](lesson-timer/README.md) |
+| [Group Shuffler](group-shuffler/) | Random classroom groups with student swaps and copy or print export. | [Instructions and source](group-shuffler/README.md) |
 
 ## Use a tool without coding
 
