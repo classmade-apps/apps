@@ -1,0 +1,7 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {Countdown,formatTime} from '../src/timer-model.js';
+test('countdown pauses and resumes without counting paused time',()=>{const timer=new Countdown(10000);timer.start(1000);timer.pause(3500);assert.equal(timer.remaining,7500);assert.equal(timer.running,false);timer.tick(20000);assert.equal(timer.remaining,7500);timer.start(20000);assert.equal(timer.tick(27499),false);assert.equal(timer.tick(27500),true);assert.equal(timer.tick(28000),false);assert.equal(timer.remaining,0);});
+test('background delay completes once and restarting restores duration',()=>{const timer=new Countdown(1000);timer.start(0);assert.equal(timer.tick(100000),true);assert.equal(timer.tick(100001),false);timer.start(100002);assert.equal(timer.remaining,1000);timer.reset();assert.equal(timer.running,false);});
+test('duration changes reset a running countdown and reject invalid values',()=>{const timer=new Countdown();timer.start(0);timer.setDuration(60000);assert.equal(timer.running,false);assert.equal(timer.remaining,60000);for(const invalid of [0,-1,NaN,Infinity,10800001])assert.throws(()=>timer.setDuration(invalid),RangeError);});
+test('display rounds up fractional seconds and never shows negative time',()=>{assert.equal(formatTime(59001),'01:00');assert.equal(formatTime(1),'00:01');assert.equal(formatTime(-10),'00:00');assert.equal(formatTime(10800000),'180:00');});

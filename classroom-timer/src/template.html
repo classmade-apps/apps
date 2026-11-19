@@ -1,0 +1,28 @@
+<!doctype html>
+<!-- MIT License
+
+Copyright (c) 2026 Classmade contributors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>My classroom timer</title><style>{{STYLES}}</style></head>
+<body><a class="skip" href="#main">Skip to content</a><main class="wrap" id="main"><div class="tool-heading"><section class="page-intro"><h1>My classroom timer</h1><p>Your own copy. Ready for your next lesson.</p></section><button class="button secondary" id="fullscreen" type="button">Enter fullscreen</button></div><section class="timer-shell" id="timer-shell" aria-label="Classroom countdown timer"><div class="timer-label"><label class="small" for="activity">Activity</label><input id="activity" maxlength="70" value="Independent reading" aria-label="Activity name"></div><div id="time-display" class="time-display" role="timer" aria-label="Time remaining" aria-live="off">05:00</div><div class="progress" aria-hidden="true"><span id="progress-fill"></span></div><div class="presets" aria-label="Choose duration"><button type="button" data-minutes="1">1 min</button><button type="button" data-minutes="5">5 min</button><button type="button" data-minutes="10">10 min</button><button type="button" data-minutes="15">15 min</button><button type="button" data-minutes="25">25 min</button></div><div class="actions timer-actions"><button type="button" id="start-pause">Start timer</button><button type="button" class="secondary" id="reset">Reset</button></div><form id="custom-time" class="custom-time"><label for="minutes">Minutes<input id="minutes" type="number" min="0" max="180" step="1" value="5" required></label><label for="seconds">Seconds<input id="seconds" type="number" min="0" max="59" step="1" value="0" required></label><button type="submit">Set time</button></form><label class="sound-label"><input id="sound" type="checkbox">Play a gentle chime when time is up</label><p id="timer-status" class="message" role="status">Ready when you are.</p><p class="small">Changing the duration resets the timer. Keep this tab open.</p></section><p class="small">This copy works offline. To customize it, open this HTML file in a text editor and search for MAKE IT YOURS. Keep the MIT license notice included in the code when sharing your version.</p><noscript>Enable JavaScript in your browser to run this timer.</noscript></main>
+<script>
+{{SCRIPT}}
+</script></body></html>
